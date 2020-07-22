@@ -167,6 +167,6 @@ Mini-PMS를 이용하는 회원 정보를 출력한다. 일단 한 명의 정보
     -  build.gradle 빌드 스크립트 파일에 'eclipse' 플러그인 추가
     - 이클립스 설정 파일 생성
       - > gradle eclipse
-    -Eclipse IDE로 프로젝트 가져오기
-      bitcamp-java-project import
-      bitcamp-java-basic import
+    - Eclipse IDE로 프로젝트 가져오기
+      - bitcamp-java-project import
+      - bitcamp-java-basic import
