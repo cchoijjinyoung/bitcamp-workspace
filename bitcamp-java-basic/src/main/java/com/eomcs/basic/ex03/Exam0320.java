@@ -13,4 +13,3 @@ class Exam0320 //클래스 이름을 소스파일과 맞춰주자  - 클래스 �
        System.out.println(3.14f); // f 나 F 를 붙이면 4바이트 메모리에 저장한다 . F = float
     }
 } 
-
