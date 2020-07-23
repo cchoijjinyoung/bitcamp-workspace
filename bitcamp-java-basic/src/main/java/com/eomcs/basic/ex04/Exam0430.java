@@ -6,7 +6,7 @@ public class Exam0430 {
     char c;
     
     c = 02;
-    c = 6535;
+    c = 6512335;
     //c = -1;
     //c= 65536;
     
