@@ -4,7 +4,7 @@ public class Practice2 {
   public static void main(String[] args) {
     
     int age;
-    age = 30;
+    age = 20;
     
     int weight;
     int height;
