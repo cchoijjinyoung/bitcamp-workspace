@@ -16,6 +16,8 @@ public class Exam0521 {
     arr1 = new int[5];
     //int[] arr1 = {100, 90, 80, 70, 60};
     
+    System.out.println(sum1);
+    
     arr1[0] = 100;
     arr1[1] = 90;
     arr1[2] = 80;
@@ -25,7 +27,8 @@ public class Exam0521 {
     int sum2 = 0;
     for (int item : arr1) {
       sum2 = sum2 + item;
-      
+     
+      System.out.println(sum2);
     }
     
     
