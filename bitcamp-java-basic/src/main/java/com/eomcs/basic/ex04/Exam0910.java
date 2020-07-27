@@ -98,6 +98,7 @@ public class Exam0910 {
    l = 130;
    b = (byte) l;
    System.out.println(b);
+   System.out.println(b);
    
    
    
