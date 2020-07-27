@@ -20,72 +20,53 @@ import java.sql.Date;
 // 6) 상수를 사용하여 초기 값을 변경하지 못하게 막기
 // - 변수는 중간에 값을 바꿀 수 있기 때문에 값을 바꾸지 말아야 하는 경우
 //   상수로 선언한다.
+public class App_e {
 
-// 7) 매서드를 사용하여 코드를 분리하기
-// - 매서드를 사용하면 기능 별로 코드를 별도의 블럭으로 분리할 수 있다.
-//   작은 단위로 코드가 분리되면 관리하기 쉽다.
-
-// 8) 클래스를 사용하여 데이터를 담을 메모리를 정의한다.
-// - 번호, 이름, 이메일 등 각각의 데이터를 낱개로 다루는 것 보다
-//   하나의 데이터로 묶어서 다루면 값을 다루기가 편하다.
-public class App {
-  
-  static class Member {
-    int no;
-    String name;
-    String email;
-    String password;
-    String photo;
-    String tel;
-    Date now;
-  }
-  
-  static int count = 0;
-  static final int MAX_LENGTH = 5;
-  static Member[] members = new Member[MAX_LENGTH];
-  
   public static void main(String[] args) {
+    
+    Scanner keyInput = new Scanner(System.in);
+    
     
     System.out.println("[회원]");
     
-    inputMembers(); // 별도의 블록으로 분리한 코드를 실행하기
-    
-    System.out.println("------------------------------");
-    
-    printMembers();
-    }
-  
-  static void inputMembers() {
-    Scanner keyInput = new Scanner(System.in);
+    // 최대 5명의 회원 정보를 입력 받는 변수를 선언.
+    final int MAX_LENGTH = 5;
+    int[] no = new int[MAX_LENGTH];
+    String[] name = new String[MAX_LENGTH];
+    String[] email = new String[MAX_LENGTH];
+    String[] password = new String[MAX_LENGTH];
+    String[] photo = new String[MAX_LENGTH];
+    String[] tel = new String[MAX_LENGTH];
+    Date[] now = new Date[MAX_LENGTH];
+   
     long currentMillis = 0;
+    int count = 0;
+    
     for (int i = 0; i < MAX_LENGTH; i++) {
-      
+   
       count++;
-      Member m = new Member();
       
       System.out.print("번호? ");
-      m.no = keyInput.nextInt();
+      no[i] = keyInput.nextInt();
       keyInput.nextLine();
       
       System.out.print("이름? ");
-      m.name = keyInput.nextLine();
+      name[i] = keyInput.nextLine();
       
       System.out.print("이메일? ");
-      m.email = keyInput.nextLine();
+      email[i] = keyInput.nextLine();
       
       System.out.print("암호? ");
-      m.password = keyInput.nextLine();
+      password[i] = keyInput.nextLine();
       
       System.out.print("사진? ");
-      m.photo = keyInput.nextLine();
+      photo[i] = keyInput.nextLine();
       
       System.out.print("전화? ");
-      m.tel = keyInput.nextLine();
+      tel[i] = keyInput.nextLine();
       
       currentMillis = System.currentTimeMillis(); //1970-1-1 00:00:00 에서 경과 된 밀리초     
-      m.now = new Date(currentMillis);
-      
-      members[i] = m;
+      now[i] = new Date(currentMillis);
       
       System.out.print("계속 입력하시겠습니까?(y/N) ");
       String response= keyInput.nextLine(); 
@@ -93,15 +74,14 @@ public class App {
       if (response.equalsIgnoreCase("y") == false) {
         break; //반복문을 멈춰라.
       }
-    }   keyInput.close();
+    }
     
-  }
-  static void printMembers() {
+    keyInput.close();
+    
+    System.out.println("------------------------------");
     for (int i = 0; i < count; i++) {
-      Member m = members[i];
-      
       System.out.printf("%d, %s, %s, %s, %s, %s, %s\n",
-          m.no, m.name, m.email, m.password, m.photo, m.tel, m.now.toString());
+          no[i], name[i], email[i], password[i], tel[i], now[i]);
     }
   }
 }

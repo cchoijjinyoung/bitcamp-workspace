@@ -1,0 +1,27 @@
+package com.eomcs.basic.ex04;
+
+public class Exam0710 {
+  // 클래스 블록에 바로 선언하는 변
+  int a; // 논스테틱(non-static) = 인스턴스 필드(field, 변수)
+  
+  static int b; // 스태틱 필드(field) = 클래스 필드
+  
+  public static void main(String[] args) { /* 로컬 변수 = 파라미터*/
+    int c; // 로컬 변수
+    
+    
+    
+  
+   
+   
+    
+    
+    
+    
+    
+    
+    }
+    
+    
+    
+  }
