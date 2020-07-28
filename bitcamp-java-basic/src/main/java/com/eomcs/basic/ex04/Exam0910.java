@@ -4,7 +4,7 @@ public class Exam0910 {
  public static void main(String[] args) {
    byte b = 100;
    short s = 100;
-   int i = 100;
+   int i = 100;                 //private data type
    long l = 100;
    float f = 100;
    double d = 100.0;
