@@ -6,6 +6,7 @@ public class Test0420 {
  public static void main(String[] args) {
    
    int i = 0b01101001;
+   int j = 105;
    
    System.out.println(i);
    
@@ -13,6 +14,11 @@ public class Test0420 {
    System.out.println(i >> 2);
    System.out.println(i >> 3);
    System.out.println(i >> 4);
+   
+   System.out.println(j >> 1);
+   System.out.println(j >> 2);
+   System.out.println(j >> 3);
+   System.out.println(j >> 4);
    
    
    

@@ -20,6 +20,15 @@ public class Test0410 {
    System.out.println(i << 2);
    System.out.println(i << 3);
    
+   String s = "abc";
+   String s2 = "가나다";
+   String s3 = "a가b";
+   
+   System.out.println(s.length());
+   System.out.println(s2.length());
+   System.out.println(s2.length());
+   
+   
    
 
    
