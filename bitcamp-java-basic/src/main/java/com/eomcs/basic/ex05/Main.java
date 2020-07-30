@@ -13,7 +13,7 @@ public class Main {
     B = B / 10;
     System.out.println(A * (B % 10));
     System.out.println(A * B);
-    awd
+    
     
 
   }
