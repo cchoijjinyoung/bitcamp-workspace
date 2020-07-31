@@ -1,27 +1,26 @@
 package com.eomcs.pms;
 
 import java.util.Scanner;
-import java util.Date;
 
 public class App3 {
 
   public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
+    Scanner keyInput = new Scanner(System.in);
 
     System.out.printf("[작업]");
 
     System.out.printf("프로젝트? ");
-    project = sc.nextLine();
+    project = keyInput.nextLine();
 
     System.out.printf("번호? ");
-    String str= sc.nextLine();
+    String str= keyInput.nextLine();
     int no = Integer.parseInt(str);
 
     System.out.printf("내용? ");
-    String content = sc.nextLine();
+    String content = keyInput.nextLine();
 
     System.out.printf("완료일? ");
-    java.sql.Date completeDate = java.sql.Date.valueOf(sc.nextLine());
+    java.sql.Date completeDate = java.sql.Date.valueOf(keyInput.nextLine());
 
 
     System.out.println("상태? ");
@@ -29,12 +28,12 @@ public class App3 {
     System.out.println("1: 진행중");
     System.out.println("2: 완료");
     System.out.printf("> ");
-    String state = sc.nextLine();
+    String state = keyInput.nextLine();
 
     System.out.printf("담당자? ");
-    String home = sc.nextLine();
+    String home = keyInput.nextLine();
 
-    sc.close();
+    keyInput.close();
 
     System.out.println("----------------------------------");
 

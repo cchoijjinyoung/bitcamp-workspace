@@ -1,64 +1,88 @@
 package com.eomcs.pms;
 
 import java.sql.Date;
+import java.util.Scanner;
 
 public class App2 {
 
   public static void main(String[] args) {
-    
-    java.util.Scanner keyInput = new java.util.Scanner(System.in);
-    
+    class Project {
+    int no;
+    String title;
+    String content;
+    Date startDate;
+    Date endDate;
+    String owner;
+    String members;
+    }
 
-    System.out.print("[");
-    System.out.print("프로젝트");
-    System.out.println("]");
+    int count = 0;
+    final int MAX_LENGTH = 100;
+    Project[] member = new Project[MAX_LENGTH];
 
-    System.out.print("번호? ");
-    String no = keyInput.nextLine();
-    
-    
-    System.out.print("프로젝트명? ");
-    String title = keyInput.nextLine();
-    
-    
+    Scanner keyInput = new Scanner(System.in);
 
-    System.out.print("내용? ");
-    String content = keyInput.nextLine();
-    
-    
 
-    System.out.print("시작일? "); //사용자가 입력한 문자열을 날짜로 받을 때에는 valueOf 사용.
-    java.sql.Date startDate = java.sql.Date.valueOf(keyInput.nextLine());
-    
-    
-    
-    System.out.print("종료일? ");
-    java.sql.Date endDate = java.sql.Date.valueOf(keyInput.nextLine());
-    
-    
-    
+    System.out.print("[프로젝트]");
+    System.out.println();
 
-    System.out.print("만든이? ");
-    String maker = keyInput.nextLine();
-    
-    
-    System.out.print("팀원? ");
-    String teamp = keyInput.nextLine();
-    
-    
-    
+    for (int i = 0; i < MAX_LENGTH; i++) {
+      Project p = new Project();
+
+      System.out.print("번호? ");
+      p.no = keyInput.nextInt();
+      keyInput.nextLine();
+
+      System.out.print("프로젝트명? ");
+      p.title = keyInput.nextLine();
+
+      System.out.print("내용? ");
+      p.content= keyInput.nextLine();
+
+      System.out.print("시작일? ");
+      p.startDate = Date.valueOf(keyInput.nextLine());
+
+      System.out.print("종료일? ");
+      p.endDate = Date.valueOf(keyInput.nextLine());
+
+      System.out.print("만든이? ");
+      p.owner = keyInput.nextLine();
+
+      System.out.print("팀원? ");
+      p.members = keyInput.nextLine();
+
+      member[i] = p;
+
+      System.out.println();
+
+      System.out.println("계속 입력하시겠습니까?(y/N) ");
+      String response = keyInput.nextLine();
+      count++;
+
+      if (!response.equalsIgnoreCase("y")) {
+        break;
+      }
+
+
+    }
+
     keyInput.close();
+
     System.out.println("----------------------------");
-    System.out.println("번호: "+ no);
-    System.out.printf("프로젝트명: %s\n", title);
-    System.out.printf("내용: %s\n", content);
-    System.out.printf("시작일: %s\n", startDate);
-    System.out.printf("종료일: %s\n", endDate);
-    System.out.printf("만든이: %s\n", maker);
-    System.out.printf("팀원: %s, %s\n", maker,teamp);
-    
-    
-    
-        
+
+    for (int i = 0; i < count; i++) {
+      Project p = new Project();
+      p = member[i];
+      System.out.printf("%d, %s, %s, %s ,%s, %s\n",
+          p.no,
+          p.title,
+          p.startDate,
+          p.endDate,
+          p.owner,
+          p.members);
+    }
   }
 }
+
+
+
