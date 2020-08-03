@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 // 1) 명령 프롬프트를 출력한다
 // 2) 명령어를 입력 받아 출력한다.
-public class App {
+public class Apptlfwjs {
 
   public static void main(String[] args) {
     Scanner keyInput = new Scanner(System.in);
@@ -137,56 +137,4 @@ public class App {
       System.out.println("종료!");
     }
   }
-
-
-
-
-
-
-    /*
-
-static
-
-
-
-    System.out.println("[회원]");
-
-    inputMembers(); // 별도의 블록으로 분리한 코드를 실행하기
-
-    System.out.println("------------------------------");
-
-    printMembers();
-    }
-
-  static void inputMembers() {
-    Scanner keyInput = new Scanner(System.in);
-    long currentMillis = 0;
-    for (int i = 0; i < MAX_LENGTH; i++) {
-
-      count++;
-      Member m = new Member();
-
-
-
-
-
-      System.out.print("계속 입력하시겠습니까?(y/N) ");
-      String response= keyInput.nextLine();
-
-      if (response.equalsIgnoreCase("y") == false) {
-        break; //반복문을 멈춰라.
-      }
-    }
-
-  }
-  static void printMembers() {
-
-      Member m = members[i];
-
-      System.out.printf("%d, %s, %s, %s, %s, %s, %s\n",
-          m.no, m.name, m.email, m.password, m.photo, m.tel, m.now.toString());
-    }
-    */
-
-
 

@@ -5,18 +5,10 @@ import java.util.Scanner;
 
 // 1) 명령 프롬프트를 출력한다
 // 2) 명령어를 입력 받아 출력한다.
-public class App {
+public class App_clear {
 
   public static void main(String[] args) {
     Scanner keyInput = new Scanner(System.in);
-
-
-
-    loop:
-    while (true) {
-      System.out.print("명령> ");
-
-      String command = keyInput.nextLine();
 
       // 회원
       final int LENGTH = 100;
@@ -40,6 +32,12 @@ public class App {
       String[] powner = new String[PLENGTH];
       String[] pmembers = new String[PLENGTH];
       int pcount = 0;
+
+      loop:
+      while (true) {
+        System.out.print("명령> ");
+
+        String command = keyInput.nextLine();
 
 
       switch (command.toLowerCase()) {

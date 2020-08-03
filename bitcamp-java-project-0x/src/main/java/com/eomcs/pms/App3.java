@@ -10,7 +10,7 @@ public class App3 {
     System.out.printf("[작업]");
 
     System.out.printf("프로젝트? ");
-    String command = keyInput.nextLine();
+    project = keyInput.nextLine();
 
     System.out.printf("번호? ");
     String str= keyInput.nextLine();

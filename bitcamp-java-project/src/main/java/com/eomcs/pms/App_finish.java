@@ -5,18 +5,10 @@ import java.util.Scanner;
 
 // 1) 명령 프롬프트를 출력한다
 // 2) 명령어를 입력 받아 출력한다.
-public class App {
+public class App_finish {
 
   public static void main(String[] args) {
     Scanner keyInput = new Scanner(System.in);
-
-
-
-    loop:
-    while (true) {
-      System.out.print("명령> ");
-
-      String command = keyInput.nextLine();
 
       // 회원
       final int LENGTH = 100;
@@ -41,8 +33,27 @@ public class App {
       String[] pmembers = new String[PLENGTH];
       int pcount = 0;
 
+      //작업 상태
+      final int TLENGTH = 100;
+      int[] tno = new int[TLENGTH];
+      String[] tcontent = new String[TLENGTH];
+      Date[] tdeadline = new Date[TLENGTH];
+      String[] towner = new String[TLENGTH];
+      int[] tstatus = new int[TLENGTH];
+      int tcount = 0;
+
+
+
+      loop:
+      while (true) {
+        System.out.print("명령> ");
+
+        String command = keyInput.nextLine();
+
 
       switch (command.toLowerCase()) {
+
+
 
         case "/member/add":
           System.out.println("[회원 등록]");
@@ -130,6 +141,29 @@ public class App {
           break loop;
           default:
             System.out.println("실행할 수 없는 명령입니다.");
+
+          case "/task/add":
+
+            System.out.println("[작업 등록]");
+
+            System.out.print("번호? ");
+            tno[tcount] = keyInput.nextInt();
+            System.out.print("내용? ");
+            tcontent[tcount] = keyInput.nextLine();
+            System.out.print("마감? ");
+            tdeadline[tcount] = Date.valueOf(keyInput.nextLine());
+            System.out.print("상태?\\n0: 신규\\n1: 진행중\\n2: 완료\\n> ");
+            tstatus[tcount] = keyInput.nextInt();
+            if
+            System.out.print("담당자? ");
+            towner[tcount] = keyInput.nextLine();
+
+            tcount++;
+
+            break;
+          case "/tast/list":
+            break;
+
       }
 
     }
