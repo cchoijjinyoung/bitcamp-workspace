@@ -10,6 +10,6 @@ public class Exam0271 {
 
   public static void main(String[] args) {
 
-
+awd
   }
   }
