@@ -27,6 +27,12 @@ public class Exam0210 {
 
     m10(new int[] {100, 90, 80}, new String[] {"국어", "영어", "수학", "홍길동"});
 
+    // 2 + 3 + 7 + 4 = ?
+//    int sum = 0;
+//    sum = plus(2, 3);
+//    sum = plus(sum, 7);
+//    sum = plus(sum, 4);
+//    System.out.println(sum);
 
   }
   static void m1() {
@@ -94,5 +100,19 @@ public class Exam0210 {
       for (int i =0; i < scores.length; i++) {
         System.out.printf("%s = %d 점\n",  titles[i], scores[i]);
       }
-    }
+
+      }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
