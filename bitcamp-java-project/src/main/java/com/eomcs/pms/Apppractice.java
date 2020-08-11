@@ -40,7 +40,7 @@ public class Apppractice {
   static Project[] projects = new Project[PLENGTH];
   static int psize = 0;
 
-  // 작업 데이터
+  // 작업 데이터 static Task[] tasks = new Task[TLENGTH];
   static final int TLENGTH = 100;
   static int[] tno = new int[TLENGTH];
   static String[] tcontent = new String[TLENGTH];
