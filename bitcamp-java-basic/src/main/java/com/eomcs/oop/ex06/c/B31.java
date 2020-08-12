@@ -1,6 +1,6 @@
 package com.eomcs.oop.ex06.c;
 
-public class B3 extends B {
+public class B31 extends B {
   // 오버라이딩 문법 검사
   // => 오버라이딩을 제대로 했는지 컴파일러에게 검사하도록 요청할 수 있다.
   // => 어떻게?

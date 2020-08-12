@@ -5,10 +5,10 @@ public final class Exam0210 {
   // 필드에 final 을 붙이면 상수 필드가 된다.
   // 생성자에서 초기화시켜야 한다.
   //
-  final int a;
+  final int a = 100;
 
   public Exam0210() {
-    a = 100;
+    //a = 100; !중복
   }
 
   public void m1() {
