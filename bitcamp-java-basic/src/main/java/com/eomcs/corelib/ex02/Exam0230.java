@@ -41,6 +41,9 @@ public class Exam0230 {
     System.out.println(obj7 == obj8); // false
     System.out.println(obj7 == obj9); // false
     System.out.println(obj8 == obj9); // false
+    //따라서 오토박싱된 랩퍼 객체의 값을 비교할 때도
+    // 스트링 처럼 이퀄스로 비교하라.
+    System.out.println(obj7.equals(obj8));
   }
 }
 

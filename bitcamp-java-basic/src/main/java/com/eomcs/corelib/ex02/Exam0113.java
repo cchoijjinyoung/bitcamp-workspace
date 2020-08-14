@@ -6,7 +6,7 @@ public class Exam0113 {
 
     String s1 = new String("Hello");
 
-    // intern()
+//     intern()
     // - 지정된 String 객체를 상수풀에서 찾는다.
     // - 있으면 그 String 객체의 주소를 리턴한다.
     // - 없으면 상수풀에 String 객체를 생성한 후 그 주소를 리턴한다.

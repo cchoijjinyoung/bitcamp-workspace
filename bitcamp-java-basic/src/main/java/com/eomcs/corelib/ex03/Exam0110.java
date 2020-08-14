@@ -9,6 +9,7 @@ package com.eomcs.corelib.ex03;
 public class Exam0110 {
   public static void main(String[] args) {
     ArrayList list = new ArrayList();
+    // 인스턴스 목록을 저장했다가 조회할때 사용하기 좋다.
     list.add("aaa"); // aaa,
     list.add("bbb"); // aaa, bbb,
     list.add("ccc"); // aaa, bbb, ccc,
@@ -24,8 +25,8 @@ public class Exam0110 {
 
     // 우리가 작성한 remove()는 유효한 인덱스가 아닌 경우 무시한다.
     //
-    list.remove(4); // bbb, ddd,
-    print(list);
+//    list.remove(4); // bbb, ddd,
+//    print(list);
 
     list.add(1, "xxx"); // bbb, xxx, ddd,
     list.add(1, "yyy"); // bbb, yyy, xxx, ddd
@@ -42,6 +43,7 @@ public class Exam0110 {
     list.add("eee"); // zzz, aaa, yyy, xxx, ddd, ccc, eee
 
     print(list);
+
   }
 
   static void print(ArrayList list) {
