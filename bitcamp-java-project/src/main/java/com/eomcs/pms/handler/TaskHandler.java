@@ -12,10 +12,19 @@ public class TaskHandler {
     int status;
   }
   static final int LENGTH = 100;
-  static Task[] list = new Task[LENGTH];
-  static int size = 0;
+  Task[] list = new Task[LENGTH];
+  int size = 0;
 
-  public static void add() {
+  MemberHandler memberHandler;
+
+  public TaskHandler(MemberHandler memberHandler) {
+    this.memberHandler = memberHandler;
+  }
+
+
+
+
+  public void add() {
     System.out.println("[작업 등록]");
 
     Task t = new Task();
@@ -31,7 +40,7 @@ public class TaskHandler {
       if (name.length() == 0) {
         System.out.println("작업 등록을 취소합니다.");
         return;
-      } else if (MemberHandler.findByName(name) != null) {
+      } else if (memberHandler.findByName(name) != null) {
         t.owner = name;
         break;
       }
@@ -42,7 +51,7 @@ public class TaskHandler {
     list[size++] = t;
   }
 
-  public static void list() {
+  public void list() {
     System.out.println("[작업 목록]");
 
     for (int i = 0; i < size; i++) {

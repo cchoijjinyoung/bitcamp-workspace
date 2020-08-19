@@ -13,11 +13,21 @@ public class ProjectHandler {
     String owner;
     String members;
   }
-  static final int LENGTH = 100;
-  static Project[] list = new Project[LENGTH];
-  static int size = 0;
 
-  public static void add() {
+  static final int LENGTH = 100;
+  Project[] list = new Project[LENGTH];
+  int size = 0;
+
+  MemberHandler memberHandler;
+
+  public ProjectHandler(MemberHandler memberHandler) {
+    this.memberHandler = memberHandler;
+  }
+  //인스턴스에 변수들을 유효한 값으로 초기화시키는 생성자를 정의한다.
+
+
+  public void add() {
+
     System.out.println("[프로젝트 등록]");
 
     Project p = new Project();
@@ -34,7 +44,7 @@ public class ProjectHandler {
       if (name.length() == 0) {
         System.out.println("프로젝트 등록을 취소합니다.");
         return;
-      } else if (MemberHandler.findByName(name) != null) {
+      } else if (memberHandler.findByName(name) != null) {
         p.owner = name;
         break;
       }
@@ -48,7 +58,7 @@ public class ProjectHandler {
 
       if (name.length() == 0) {
         break;
-      } else if (MemberHandler.findByName(name) != null) {
+      } else if (memberHandler.findByName(name) != null) {
         if (names.length() > 0) {
           names.append(",");
         }
@@ -60,9 +70,16 @@ public class ProjectHandler {
     p.members = names.toString();
 
     list[size++] = p;
+
+    // MemberHandler 의 인스턴스 필드가 보호되지 않기 때문에 외부로부터의 접근을
+    // 다음과 같이 임의의 값으로 변경될 수 있다.
+    // => 이러한 변경은 의존 객체를 사용하는 다른 쪽도 영향을 받을 수 있다.
+    // memberHandler.size = 0;
+    // 위와 같은 무효한 값으로 변경하는 것을 막지 못한다면?
+    // 코드 작성한 의도와 다르게 동작할 수 있다.
   }
 
-  public static void list() {
+  public void list() {
     System.out.println("[프로젝트 목록]");
 
     for (int i = 0; i < size; i++) {
