@@ -1,21 +1,23 @@
-
 package com.eomcs.basic.ex07;
 
 public class Exam0420 {
 
-  static int[] getArray() {
-    int[] arr = new int[] {100, 200, 300};
-    return arr;
+
+  static class My {
+    int a;
+    int b;
   }
 
-  public static void main(String[] args) {
-    int[] arr;
-    arr = getArray();
-    System.out.println(arr[2]);
+  static My getMy() {
+    My ref = new My();
+    ref.a = 100;
+    ref.b = 200;
+    return ref;
   }
+  public static void main(String[] args) throws Exception {
+    My ref = getMy();
+    System.out.println(ref.a);
   }
 
-
-
-
+}
 

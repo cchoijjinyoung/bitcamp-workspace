@@ -1,9 +1,12 @@
 package com.eomcs.basic.ex06;
 
+//# 흐름 제어문 - switch와 break
+//
 public class Exam0223 {
   public static void main(String[] args) {
     int score = 60;
-
+    // break 문을 쓰지 않으면 계속 이어서 실행된다.
+    // => 일부러 쓰지 않을 때가 있다.
     switch (score) {
       case 100:
       case 90:
@@ -18,12 +21,18 @@ public class Exam0223 {
       case 40:
         System.out.println("C");
         break;
-        default:
-          System.out.println("F");
+      default:
+        System.out.println("F");
+    }
 
-      }
+    String value = "developer";
+
+    switch (value) {
+      case "developer":
+        break;
+      case "manager":
+        break;
+      default:
     }
   }
-
-
-
+}

@@ -17,7 +17,6 @@ public class Exam0110 {
     stack.push(s2);
     stack.push(s3);
     print(stack);
-
     System.out.println("==>" + stack.pop()); // ccc
     System.out.println("==>" + stack.pop()); // bbb
     print(stack);
@@ -26,12 +25,19 @@ public class Exam0110 {
     stack.push(s5);
     print(stack);
 
-    System.out.println("-------------------------------------");
-
     String value;
-    while ((value = (String) stack.pop()) != null) {
-      System.out.println(value);
+    try {
+      while (true) {
+        System.out.println(stack.pop());
+      }
+    } catch (Exception e) {
+      System.out.println("스택에서 더 이상 꺼낼 데이터가 없습니다.");
     }
+
+    stack.push(s4);
+    stack.push(s5);
+    print(stack);
+
   }
 
   static void print(Stack list) {

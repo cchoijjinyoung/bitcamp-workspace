@@ -8,16 +8,13 @@ public class Exam0521 {
     a2 = 90;
     a3 = 80;
     a4 = 70;
-    a5 = 60;
+    a5 =60;
+    
     
     int sum1 = a1 + a2 + a3 + a4 + a5;
     
     int[] arr1;
     arr1 = new int[5];
-    //int[] arr1 = {100, 90, 80, 70, 60};
-    
-    System.out.println(sum1);
-    
     arr1[0] = 100;
     arr1[1] = 90;
     arr1[2] = 80;
@@ -27,11 +24,7 @@ public class Exam0521 {
     int sum2 = 0;
     for (int item : arr1) {
       sum2 = sum2 + item;
-     
-      System.out.println(sum2);
     }
-    
-    
-    
   }
+
 }

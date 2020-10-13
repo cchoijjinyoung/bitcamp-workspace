@@ -17,16 +17,19 @@ public class Exam0230 {
     // 예) aaa    bbb cc ==> aaa, bbb, cc
     // 중간에 여러 개의 공백이 들어가더라도 한 개의 공백으로 간주한다.
 
+    System.out.println("이거");
+    String s = keyboard.nextLine();
 
     System.out.print("float: ");
     float f = keyboard.nextFloat();
+
 
     System.out.print("boolean: ");
     boolean b = keyboard.nextBoolean();
 
     keyboard.close();
 
-    System.out.printf("%d, %f, %b\n", i, f, b);
+    System.out.printf("%d, %f, %b, %s \n", i, f, b,s);
   }
 }
 

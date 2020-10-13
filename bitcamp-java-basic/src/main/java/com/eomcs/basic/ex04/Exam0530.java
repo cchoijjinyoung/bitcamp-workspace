@@ -13,8 +13,6 @@ public class Exam0530 {
     System.out.println(arr1[0]);
     System.out.println(arr1[1]);
     
-    }
-    
-    
-    
   }
+
+}

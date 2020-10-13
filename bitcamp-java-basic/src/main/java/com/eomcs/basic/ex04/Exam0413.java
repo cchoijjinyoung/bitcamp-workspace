@@ -1,9 +1,10 @@
 package com.eomcs.basic.ex04;
 
 public class Exam0413 {
+
   public static void main(String[] args) {
-    long l = 100;
-    int  i = 100;
+    long l =100;
+    int i = 100;
     short s = 100;
     byte b = 100;
     char c = 100;
@@ -17,7 +18,7 @@ public class Exam0413 {
     l2 = l;
     
     l2 = i;
-    i2 = i;
+    
     
     l2 = s;
     i2 = s;
@@ -27,6 +28,7 @@ public class Exam0413 {
     i2 = b;
     s2 = b;
     b2 = b;
+    
     
   }
 

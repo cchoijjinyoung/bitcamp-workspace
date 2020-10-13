@@ -1,15 +1,14 @@
-
 package com.eomcs.basic.ex06;
 
 public class Exam0440 {
+
   public static void main(String[] args) {
-    for (int i = 1; i <= 10; i++) {
-      for (int j = 1; j <= i; j++) {
-        if (j % 2 == 0)
-          continue;
-        System.out.print(j + " ");
-      }
-      System.out.println();
+    // TODO Auto-generated method stub
+    String[] names = {"홍길동", "임꺽정", "유관순"};
+
+    for (int i = 0; i < names.length; i++) {
+      System.out.println(names[i]);
     }
-    }
+  }
+
 }

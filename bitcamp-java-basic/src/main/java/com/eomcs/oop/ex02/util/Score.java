@@ -1,4 +1,4 @@
-package com.eomcs.basic.oop.ex02.util;
+package com.eomcs.oop.ex02.util;
 
 public class Score {
 
@@ -11,7 +11,7 @@ public class Score {
 
   public void computeScore() {
     this.sum = this.kor + this.eng + this.math;
-    this.aver = this.sum / 3f;
+    this.aver = (float)this.sum / 3;
   }
-}
 
+}

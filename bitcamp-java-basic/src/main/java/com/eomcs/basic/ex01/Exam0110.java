@@ -1,23 +1,32 @@
-// Exam0110.java
-// 주제 : 자바 프로그래밍 최소 단위 // 소스파일위치와 패키지를 일치시켜라 - 유지보수를 위해.
-
 package com.eomcs.basic.ex01;
 
-
-
 class Exam0110 {
-    public static void main(String[] args){
-    System.out.println("안녕");
+  public static class A {
+    static int a;
 
-    //자바 명령 작성//실무에서는 클래스 이름이 중요함.
-} // 컬리브레이스(중괄호)
-}
-package com.eomcs.basic.ex03;
+    static void m() {}
 
-//# 리터럴(literal)
-//- 자바 언어로 표현한 값.
-//
-
-
+    // 클래스가 로딩될 때 스태틱 초기화 블록은 실행된다.
+    // 여러 개의 스태틱 블록이 있을 때, 컴파일러는 한 개의 블록으로 합친다.
+    // - 바이트코드(Exam0610$A.class)를 확인해 보라.
+    //
+    static {
+      System.out.println("Static{} 11111");
     }
+
+    static {
+      System.out.println("Static{} 22222");
+    }
+  }
+
+  public static void main(String[] args) throws Exception {
+
+    // 클래스가 로딩되는 경우,
+    // - 레퍼런스를 선언할 때는 클래스가 로딩되지 않는다.
+    // - 그래서 스태틱 초기화 블록이 실행되지 않는다.
+    A obj1;
+    new A();
+
+    System.out.println("종료!");
+  }
 }

@@ -5,9 +5,3 @@ public class B {
     System.out.println("B의 m()");
   }
 }
-
-//public class B {
-//  void m(int a) {
-//    System.out.println("B의 m()");
-//  }
-//}

@@ -1,40 +1,35 @@
-package com.eomcs.basic.oop.ex03;
-
+package com.eomcs.oop.ex03;
 
 public class Exam0220 {
 
-    static class A {
-      int value;
-      static void m1() {
+  static class A {
 
-      }
-      void m2() {
-        this.value = 100;
+    static int v1;
+    int v2;
 
-      }
-
-      void m3() {
-        value = 200;
-      }
-
-      void m4(int value) {
-        value = 200;
-        this.value = 300;
-      }
+    static void m1() {
+      System.out.println("m1()");
+      v1 = 200;
     }
-public static void main(String[] args) {
-  A.m1();
-  A obj1 = new A();
-  obj1.m2();
-  obj1.m1();
-  A obj2 = new A();
 
-  obj2.m2();
+    void m2() {
+      System.out.println("m2()");
+      this.v2 = 200;
+
+      m1();
+    }
+
+    static int abs(int value) {
+      return (value < 0) ? -value : value;
+    }
+
+  }
+  public static void main(String[] args) {
+    A.m1();
+    A obj1 = new A();
+    obj1.m2();
+
+    System.out.println(A.abs(-100));
+    System.out.println(obj1.v2);
+  }
 }
-}
-
-
-
-
-
-

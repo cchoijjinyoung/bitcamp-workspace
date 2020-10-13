@@ -1,11 +1,11 @@
-package com.eomcs.basic.oop.ex03;
 
+package com.eomcs.oop.ex03;
 
 public class Exam0110 {
   public static void main(String[] args) {
-    // 인스턴스 변수
+
     class A {
-      int b1;
+      int v1;
       boolean b2;
     }
 
@@ -13,21 +13,10 @@ public class Exam0110 {
     A obj2 = new A();
     A obj3 = new A();
 
-    obj1.b1 = 100;
-    obj2.b1 = 200;
-    obj3.b1 = 300;
-
-
-
-
-
-
+    obj1.v1 = 100;
+    obj2.v1 = 200;
+    obj3.v1 = 300;
+    obj2.b2 = true;
   }
+
 }
-
-
-
-
-
-
-

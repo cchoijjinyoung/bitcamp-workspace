@@ -50,7 +50,7 @@ public class Exam0450 {
     // |||||- python
     // ||||- javascript
     // |||- java
-    // ||- c++
+    // ||- c++장례식에 앞서, 고인의 생의 업적 하이라이트 영상 보시겠습니다.
     // |- c
     
     // 이렇게 준비된 32비트 메모리에서 특정 비트의 값을 1로 설정하고 싶다면 
@@ -76,9 +76,6 @@ public class Exam0450 {
     //lang2 |= 0x00; // css = false
 
     // 실무에서는 이렇게 비트를 이용하여 여러 개의 true/false 상태를 저장하기도 한다.
-    System.out.println(Integer.toHexString(lang2));
-    System.out.println(Integer.toBinaryString(lang2));
-    
 
   }
 }

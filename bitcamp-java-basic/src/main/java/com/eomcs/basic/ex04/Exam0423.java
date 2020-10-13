@@ -2,7 +2,6 @@ package com.eomcs.basic.ex04;
 
 public class Exam0423 {
   public static void main(String[] args) {
-    
     float f;
     double d;
     
@@ -13,5 +12,4 @@ public class Exam0423 {
     System.out.println(d);
     
   }
-
 }

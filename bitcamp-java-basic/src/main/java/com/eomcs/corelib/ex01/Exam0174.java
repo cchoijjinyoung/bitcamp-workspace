@@ -3,7 +3,7 @@ package com.eomcs.corelib.ex01;
 
 public class Exam0174 {
 
-  static class Engine implements Cloneable {
+  static class Engine implements Cloneable{
     int cc;
     int valve;
 
@@ -65,6 +65,7 @@ public class Exam0174 {
 
     // car의 엔진과 car2의 엔진이 다른 엔진인지 확인해보자!
     car.engine.cc = 2000;
+    car2.engine.cc = 3000;
     System.out.println(car2.engine.cc);
 
   }

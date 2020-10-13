@@ -1,25 +1,28 @@
 package com.eomcs.basic.ex07;
 
-//스텍 매서드
-
 public class Exam0412 {
-
   public static void main(String[] args) {
-    int arr[];
-
-    arr = m1(5);
-    for (int i = 0; i < arr.length; i++) {
-      System.out.println(arr[i]);
-    }
+    int a = 100;
+    System.out.println("main() >> " + a);
+    m1(a);
+    System.out.println(a + "<< main()");
   }
-  static int[] m1(int size) {
-    int[] arr = new int[size];
-
-    for (int i = 0; i < arr.length; i++) {
-      arr[i] = 100 + i;
-    }
-
-        return arr;
+  static void m1(int a) {
+    a += 100;
+    System.out.println("m1() >> " + a);
+    m2(a);
+    System.out.println(a + "<< m1()");
   }
+  static void m2(int a) {
+    a += 100;
+    System.out.println("m2() >> " + a);
+    m3(a);
+    System.out.println(a + "<< m2()");
+  }
+  static void m3(int a) {
+    a += 100;
+    System.out.println("m3() >> " + a);
+
+  }
+
 }
-

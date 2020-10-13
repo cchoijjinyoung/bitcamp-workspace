@@ -7,8 +7,11 @@ public class Exam0140 {
     obj1.name = "홍길동";
     obj1.age = "20";
 
+
     obj1.print();
     obj1.print3();
+    obj1.test();
+
   }
 }
 

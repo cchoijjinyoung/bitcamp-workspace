@@ -14,9 +14,7 @@ public class Exam0110 {
 
     ArrayBlockingQueue queue = new ArrayBlockingQueue(10);
     queue.offer(s1); // aaa,
-    print(queue);
     queue.offer(s2); // aaa, bbb,
-    print(queue);
     queue.offer(s3); // aaa, bbb, ccc,
     print(queue);
 
@@ -36,8 +34,8 @@ public class Exam0110 {
     }
   }
 
-  static void print(ArrayBlockingQueue queue) {
-    Object[] arr = queue.toArray();
+  static void print(ArrayBlockingQueue list) {
+    Object[] arr = list.toArray();
     for (int i = 0; i < arr.length; i++) {
       System.out.print(arr[i] + ", ");
     }

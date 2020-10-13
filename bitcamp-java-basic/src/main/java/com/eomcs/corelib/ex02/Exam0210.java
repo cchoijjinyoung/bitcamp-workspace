@@ -35,24 +35,7 @@ public class Exam0210 {
     Boolean bool2 = Boolean.valueOf(true);
     Character c2 = Character.valueOf((char)0x41);
   }
-  void m4(Object value) {
-    System.out.printf("value=%s\n", value);
-  } // all
-  // 만약에 wrapper class 가 없다면 다음과 같이
-  // 점수를 받는 매서드와 부동소수점을 받는 매서드
-  // 논리값을 받는 매서드를 따로따로 정의해야함;
-  // => 이런 불편함을 없애기 위해 Wrapper 클래스를 만든 것이다.
-  // => 즉 primitive type을 객체와 함께 다룰 수 있도록 만든 문법.
 
-  void m1(long value) {
-    System.out.printf("value=%s\n", value);
-  } //byte, short, int, long, char
-  void m2(double value) {
-    System.out.printf("value=%s\n", value);
-  } //float, double
-  void m3(boolean value) {
-    System.out.printf("value=%s\n", value);
-  } //boolean
 }
 
 

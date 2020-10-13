@@ -7,19 +7,10 @@ public class Exam0540 {
     
     arr1 = new int[5];
     
-    // int[] arr1 = new int[5];
-    
     arr1[0] = 100;
     
     System.out.println(arr1[0]);
-    System.out.println(arr1[1]);
-    System.out.println(arr1[2]);
-    System.out.println(arr1[3]);
-    System.out.println(arr1[4]);
-    
-    
-    }
-    
-    
     
   }
+
+}

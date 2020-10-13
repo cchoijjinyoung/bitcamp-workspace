@@ -27,6 +27,7 @@ public class Exam0152 {
     MyKey k3 = new MyKey("haha");
     MyKey k4 = new MyKey("ohora");
     MyKey k5 = new MyKey("hul");
+
     map.put(k1, new Student("홍길동", 20, false));
     map.put(k2, new Student("임꺽정", 30, true));
     map.put(k3, new Student("유관순", 17, true));

@@ -4,6 +4,7 @@ public class Exam0560 {
   public static void main(String[] args) {
     
     int v;
+    
     int[] arr1 = new int[5];
     float[] arr2 = new float[5];
     boolean[] arr3 = new boolean[5];
@@ -16,11 +17,6 @@ public class Exam0560 {
     System.out.println(arr4[0]);
     System.out.println(arr5[0]);
     
-    
-    
-    
-    }
-    
-    
-    
   }
+
+}

@@ -18,6 +18,4 @@ public class Exam0125 {
   }
 }
 
-// b2.toString부터 실행 -> b1.toString -> equals
-
 

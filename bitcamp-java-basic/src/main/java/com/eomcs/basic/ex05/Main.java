@@ -1,21 +1,25 @@
 package com.eomcs.basic.ex05;
+
 import java.util.Scanner;
+
 public class Main {
+
   public static void main(String[] args) {
-    
     Scanner sc = new Scanner(System.in);
-    int A = sc.nextInt();
-    int B = sc.nextInt();
-    int C = B;
-    System.out.println(A * (B % 10));
-    B = B / 10;
-    System.out.println(A * (B % 10));
-    B = B / 10;
-    System.out.println(A * (B % 10));
-    System.out.println(A * B);
+    int N = sc.nextInt();
+    String[] test = new String[N+1];
     
-    
-
+    for(int i = 0; i < N; i++) {
+      int sum = 0, count = 0;
+      test[i] = sc.next();
+      for(int j = 0; j < test[i].length(); j++) {
+        if (test[i].charAt(j) == 'O')
+          sum += ++count;
+        else count = 0;
+      }
+      System.out.println(sum);
+    }
+    sc.close();
   }
-}
 
+}

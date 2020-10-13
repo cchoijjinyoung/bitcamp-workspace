@@ -58,9 +58,8 @@ class Score3 {
   public float getAver() {
     return this.aver;
   }
-// 공개할 필요가 업슨 매서드 = private
-  // 해당 클래스에서만 사용할 매서드.
-  private void compute() {
+
+  void compute() {
     this.sum = this.kor + this.eng + this.math;
     this.aver = this.sum / 3f;
   }
@@ -94,14 +93,3 @@ public class Exam0310 {
         s1.getSum(), s1.getAver());
   }
 }
-
-
-
-
-
-
-
-
-
-
-

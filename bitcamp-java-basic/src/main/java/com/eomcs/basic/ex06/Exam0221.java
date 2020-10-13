@@ -1,5 +1,9 @@
 package com.eomcs.basic.ex06;
+
 import java.util.Scanner;
+
+//# 흐름 제어문 - switch 사용 후
+//
 public class Exam0221 {
   public static void main(String[] args) {
     Scanner keyScan = new Scanner(System.in);
@@ -16,22 +20,17 @@ public class Exam0221 {
         System.out.println("정보처리자격증");
         System.out.println("졸업증명서");
         System.out.println("이력서");
-        break;
+        break; // 여기까지만 실행한다.
       case 2:
         System.out.println("졸업증명서");
         System.out.println("이력서");
-        break;
+        break; // 여기까지만 실행한다.
       case 3:
         System.out.println("이력서");
-        break;
-        default:
-          System.out.println("올바른 번호를 입력하세요!");
-
+        break; // 여기까지만 실행한다.
+      default:
+        System.out.println("올바른 번호를 입력하세요!");
     }
-      keyScan.close();
-
-    }
+    keyScan.close();
   }
-
-
-
+}

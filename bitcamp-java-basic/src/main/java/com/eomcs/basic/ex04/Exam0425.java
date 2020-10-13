@@ -2,7 +2,6 @@ package com.eomcs.basic.ex04;
 
 public class Exam0425 {
   public static void main(String[] args) {
-    
     float f1 = 99988.88f;
     float f2 = 11.11111f;
     

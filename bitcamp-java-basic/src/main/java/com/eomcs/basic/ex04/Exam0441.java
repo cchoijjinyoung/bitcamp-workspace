@@ -9,7 +9,6 @@ public class Exam0441 {
     
     System.out.println(b1);
     System.out.println(b2);
-    
   }
 
 }

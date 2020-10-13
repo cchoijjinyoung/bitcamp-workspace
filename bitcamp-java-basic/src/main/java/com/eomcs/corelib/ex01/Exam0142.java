@@ -12,8 +12,7 @@ public class Exam0142 {
     obj2.age = 20;
 
     System.out.println(obj1 == obj2);
-    System.out.println(obj1.equals(obj2)); // My 클래스가 equal() 을 오버라이딩 했기 때문.
-    System.out.println(obj1.hashCode() == obj2.hashCode());
+    System.out.println(obj1.equals(obj2));
 
     System.out.println(Integer.toHexString(obj1.hashCode()));
     System.out.println(Integer.toHexString(obj2.hashCode()));
@@ -25,11 +24,6 @@ public class Exam0142 {
   static class My {
     String name;
     int age;
-
- // Map에 값을 저장하는 key로 사용할 때 hashCode()를 오버라이딩 하라!
-    // 보통 값이 같은지 비교할 때 equals()와 함께 사용된다.
-    // 그래서 hashCode()를 오버라이딩 할 때 equals()도 함께 오버라이딩 한다.
-
     @Override
     public int hashCode() {
       final int prime = 31;
@@ -57,7 +51,9 @@ public class Exam0142 {
       return true;
     }
 
-
+    // Map에 값을 저장하는 key로 사용할 때 hashCode()를 오버라이딩 하라!
+    // 보통 값이 같은지 비교할 때 equals()와 함께 사용된다.
+    // 그래서 hashCode()를 오버라이딩 할 때 equals()도 함께 오버라이딩 한다.
 
 
   }

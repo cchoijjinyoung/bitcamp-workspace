@@ -12,15 +12,7 @@ public class Exam01 {
     //       => 만약 원본 코드에 버그가 있으면 버그도 복사하게 된다.
     //          따라서 버그를 고칠 때는 복사한 모든 소스 파일을 찾아 고쳐야 한다.
     Sedan c = new Sedan("비트자동차", "티코", 5, true, true);
-
     System.out.println(c.model);
-    System.out.println(c.maker);
-    System.out.println(c.capacity);
-    System.out.println(c.auto);
-    System.out.println(c.sunroof);
-
-
-
   }
 }
 

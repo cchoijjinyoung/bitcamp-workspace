@@ -17,10 +17,10 @@ public class Exam0173 {
       return "Engine [cc=" + cc + ", valve=" + valve + "]";
     }
 
-//    @Override
-//    public Engine clone() throws CloneNotSupportedException {
-//      return (Engine) super.clone();
-//    }
+    @Override
+    public Engine clone() throws CloneNotSupportedException {
+      return (Engine) super.clone();
+    }
   }
 
   static class Car implements Cloneable {
@@ -51,6 +51,7 @@ public class Exam0173 {
 
     // 자동차 복제
     Car car2 = car.clone();
+
 
     System.out.println(car == car2); // false
     System.out.println(car);

@@ -1,12 +1,9 @@
-
-
-//주제 : 부동 소수점의 정규화 = 2진수로 바꾸기.
-
 package com.eomcs.basic.ex03;
 
-class Exam0360 { 
+public class Exam0360{
     public static void main(String[] args) {
-        System.out.println(2.127f);
+        System.out.println(12.375f);
+        System.out.println(12.375);
+        
      }
-} 
-
+}

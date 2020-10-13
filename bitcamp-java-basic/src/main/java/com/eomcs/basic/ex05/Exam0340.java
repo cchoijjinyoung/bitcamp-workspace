@@ -28,10 +28,3 @@ public class Exam0340 {
     System.out.printf("a=%b, b=%b, r=%b\n", a, b, r);
   }
 }
-
-
-
-
-
-
-

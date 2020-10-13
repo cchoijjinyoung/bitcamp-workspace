@@ -5,4 +5,3 @@ public class A {
     System.out.println("A의 m() 호출!");
   }
 }
-

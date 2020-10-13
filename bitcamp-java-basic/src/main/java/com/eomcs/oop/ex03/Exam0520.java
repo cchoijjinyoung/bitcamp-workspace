@@ -1,5 +1,5 @@
 // 변수 자동 초기화 - 인스턴스 변수
-package com.eomcs.basic.oop.ex03;
+package com.eomcs.oop.ex03;
 
 import java.sql.Date;
 
@@ -9,7 +9,7 @@ public class Exam0520 {
     short s2;
     int i2;
     long l2;
-    char c2 = 'A';
+    char c2 = ' ';
     float f2;
     double d2;
     boolean bool2;

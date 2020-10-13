@@ -1,25 +1,11 @@
-// Exam0400.java
-// 주제 : 실행할 수 있는 클래스
-
 package com.eomcs.basic.ex03;
 
-
-//# 문자 리터
-public class Exam0410 {
+public class Exam0410{
     public static void main(String[] args) {
-      
-        System.out.println('A'); 
+        
+        System.out.println('A');
         System.out.println('가');
-        System.out.println("\u0041"); //유니코드 값을 직접 지정
-        System.out.println("\u4eba"); 
-        System.out.println("\u0041");
-        
-        
-        System.out.println(65);
-        System.out.println(0x41);
-    //문자를 메모리에 저장하려면 2진수로 바꿀 수 있어야한다.
-    //문자를 2진수로 바꾸는 규칙을 "문자집합(Character Set)"라 한다.
-    
-}
-}
 
+        System.out.println('\u0041');
+    }
+}

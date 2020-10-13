@@ -16,8 +16,7 @@ public class Exam0140 {
     //System.out.println("Hello," * 5); // 컴파일 오류!
     
     System.out.println(true && true);
-    //System.out.println(10 && 10); // 컴파일 오류!이다. - int type 이라서 안됨.
-    // 논리 연산자(&&, ||)의 피연산자는 반드시 boolean 타입이어야 한다. 
+    //System.out.println(10 && 10); // 컴파일 오류!이다.
   }
 }
 

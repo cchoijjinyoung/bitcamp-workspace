@@ -3,30 +3,25 @@ package com.eomcs.corelib.ex03;
 
 import java.util.ArrayList;
 
-
 public class Exam0210 {
   public static void main(String[] args) {
-    String s1 = new String("aaa");
-    String s2 = new String("bbb");
-    String s3 = new String("ccc");
-    String s4 = new String("bbb"); // s2 != s4
+
 
     ArrayList list = new ArrayList();
-    list.add(s1);
-    list.add(s2);
-    list.add(s3);
+    list.add("aaa");
+    list.add("bbb");
+    list.add("ccc");
     print(list);
-    // contains()
-    // - 해당 인스턴스와 같은 객체가 있는지 알아낸다.
-    // - 단, 인스턴스 주소를 비교하는게 x ,
-    // - equals()의 결과가 true인지를 비교한다.[String의 equals()는 서로의 값을 비교하도록 오버라이딩됨.]
+
     // contains() 가 값을 비교할 때는
     // equals()의 결과가 true 인지 비교한다.
     // 결론!
     // => String 클래스의 경우 equals()를 오버라이딩 했기 때문에
     // 서로 다른 개체(s2와 s4)라도 값이 같으면 같은 객체로 간주한다.
     // => 그래서 다음 코드의 실행 결과는 true 이다.
-    System.out.println(list.contains(s4)); // true
+    System.out.println(list.contains("aaa"));
+    System.out.println(list.indexOf("ccc"));
+    // true
   }
 
   static void print(ArrayList list) {

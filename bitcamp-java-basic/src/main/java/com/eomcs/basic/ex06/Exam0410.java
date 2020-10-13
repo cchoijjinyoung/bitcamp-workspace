@@ -1,34 +1,23 @@
-
 package com.eomcs.basic.ex06;
 
-import java.util.ArrayList;
-
-
+//# 흐름 제어문 - for 반복문
+//
 public class Exam0410 {
   public static void main(String[] args) {
-    ArrayList<String> scores = new ArrayList<String>();
-//    scores.add(100);
-//    scores.add(90);
-//    scores.add(80);
-//    scores.add(70);
-//    scores.add(new Date());
-    scores.add("오호라");
+    // for (변수선언 및 초기화; 조건; 증감문) 문장;
+    // for (변수선언 및 초기화; 조건; 증감문) {문장1; 문장2; ...}
 
-    for (Object value : scores) {
-      System.out.println(value);
-    }
+    // for 문의 전형적인 예
+    for (int i = 1; i <= 5; i++)
+      System.out.println(i);
+    // 실행 순서
+    // 1) 변수초기화  => int i = 1
+    // 2) 조건 => i <= 10
+    // 3) 문장 => System.out.print(i + " ")
+    // 4) 변수증가문 => i++
+    // 조건이 참인 동안 2 ~ 4를 반복한다.
 
-//    int[] scores = new int Collection[5];
-//    scores[0] = 100;
-//    scores[1] = 90;
-//    scores[2] = 80;
-//    scores[3] = 70;
-//    scores[4] = 60;
-//
-//    for (int value : scores) { // 배열 나열
-//        System.out.println(value);
-      }
-    }
-
-
-
+    // for 문에서 선언한 변수는 그 for 문 안에서만 사용할 수 있다.
+    //System.out.println(i); // 컴파일 오류!
+  }
+}

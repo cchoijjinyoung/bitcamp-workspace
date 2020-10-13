@@ -20,12 +20,6 @@ public class Exam0154 {
     Integer k1 = new Integer(101);
     Integer k2 = new Integer(102);
     Integer k3 = new Integer(103);
-
-    System.out.println(k1 == k2);
-    System.out.println(k1 == k3);
-    System.out.println(k2 == k3);
-
-
     // 위에서 준비한 key 객체를 가지고 Student 객체를 보관한다.
     map.put(k1, new Student("홍길동", 20, false));
     map.put(k2, new Student("임꺽정", 30, true));
@@ -41,9 +35,9 @@ public class Exam0154 {
 
     // 다음과 같이 int를 key로 사용할 수 있다.
     // => key 값으로 int를 넘겨준다면,
-    //    컴파일러가 컴파일 할 때 내부적으로 auto-boxing을 수행하여 Integer 객체를 만든다.
+    //    내부적으로 auto-boxing을 수행하여 Integer 객체를 만든다.
     //    그리고 그 객체를 넘겨주는 것이다.
-    map.put(104,/*new Integer(104)*/ new Student("안중근", 24, true));
+    map.put(104, new Student("안중근", 24, true));
     map.put(105, new Student("윤봉길", 22, false));
 
     // 값을 저장할 때 사용한 key로 다시 값을 꺼내보자!
@@ -53,7 +47,8 @@ public class Exam0154 {
     Integer k6 = new Integer(102);
 
     // k2와 같은 값을 갖는 k6로 값을 꺼내보자!
-    System.out.println(map.get(k6));
+    System.out.println("---");
+    System.out.println(map.get(104));
 
     // 다음과 같이 k2와 k6는 분명히 다른 객체이다.
     System.out.println(k2 == k6);

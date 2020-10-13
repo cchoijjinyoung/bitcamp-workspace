@@ -29,6 +29,9 @@ public class Exam0330 {
     // r = false & true
     // r = false
     System.out.printf("a=%b, b=%b, r=%b\n", a, b, r);
+    
+    
+    
   }
 }
 // &&, ||

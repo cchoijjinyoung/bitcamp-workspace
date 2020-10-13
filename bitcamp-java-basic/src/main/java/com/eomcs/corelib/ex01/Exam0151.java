@@ -49,7 +49,6 @@ public class Exam0151 {
 
   }
 
-
   public static void main(String[] args) {
     Student s1 = new Student("홍길동", 20, false);
     Student s2 = new Student("홍길동", 20, false);
@@ -65,10 +64,6 @@ public class Exam0151 {
     System.out.println("--------------------");
 
     // 해시셋(집합)에 객체를 보관한다.
-    // 집합은 중복 값을 저장하지 않음.
-    // 해시코드와 이콜스 둘다 같다고 판명시에만 적용.
-    // 해시코드와 이콜스 둘다 오버라이딩 해야한다.
-
     HashSet<Student> set = new HashSet<Student>();
     set.add(s1);
     set.add(s2);
@@ -92,10 +87,6 @@ public class Exam0151 {
   }
 
 }
-
-
-
-
 
 
 

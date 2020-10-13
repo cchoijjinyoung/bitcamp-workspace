@@ -7,7 +7,7 @@ public class Exam0150 {
     byte b = 1;
     short s = 2;
     int i = 3;
-    long l = 4;               //primative data type
+    long l = 4;
     float f = 5.5f;
     double d = 6.6;
     boolean bool = true;

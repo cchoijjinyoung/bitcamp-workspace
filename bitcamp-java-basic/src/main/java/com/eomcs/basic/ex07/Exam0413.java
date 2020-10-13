@@ -2,11 +2,9 @@ package com.eomcs.basic.ex07;
 
 import java.util.ArrayList;
 
-//스텍 매서드
-
 public class Exam0413 {
-
   public static void main(String[] args) throws Exception {
+    int[] arr;
     ArrayList list = new ArrayList();
 
     while (true) {
@@ -15,13 +13,9 @@ public class Exam0413 {
     }
 
 
-
   }
   static int[] createArray() {
-
-   System.out.print(" . ");
-    return new int[10_000_000];
-
+    System.out.println(" . ");
+    return new int[1000000];
   }
 }
-

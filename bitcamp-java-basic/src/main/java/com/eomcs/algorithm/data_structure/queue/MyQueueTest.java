@@ -1,35 +1,31 @@
 package com.eomcs.algorithm.data_structure.queue;
 
 public class MyQueueTest {
-public static void main(String[] args) {
-  MyQueue queue = new MyQueue();
+  public static void main(String[] args) {
+    MyQueue queue = new MyQueue();
+    queue.offer("aaa");
+    queue.offer("bbb");
+    queue.offer("ccc");
+    System.out.println(queue.peek());
+    queue.offer("ddd");
+    queue.offer("eee");
 
-  queue.offer("aaa");
-  queue.offer("bbb");
-  System.out.println("-------------->" + queue.peek());
-  queue.offer("ccc");
-  queue.offer("ddd");
-  queue.offer("eee");
-  print(queue);
+    System.out.println(queue.poll());
+    System.out.println(queue.poll());
+    System.out.println(queue.poll());
+    System.out.println(queue.poll());
+    System.out.println(queue.poll());
+    System.out.println(queue.poll());
+    System.out.println(queue.poll());
 
-  System.out.println(queue.poll());
-  System.out.println(queue.poll());
-  System.out.println("-------------->" + queue.peek());
-  System.out.println(queue.poll());
-  System.out.println(queue.poll());
-  System.out.println(queue.poll());
-  System.out.println(queue.poll());
-  System.out.println(queue.poll());
-  System.out.println(queue.size());
-
-
-
+    print(queue);
   }
-static void print (MyQueue queue) {
-  for (int i = 0; i < queue.size(); i++) {
-    System.out.print(queue.get(i) + ",");
 
+  static void print(MyQueue queue) {
+    for (int i = 0; i < queue.size(); i++) {
+      System.out.print(queue.get(i) + ",");
+    }
+    System.out.println();
   }
-  System.out.println();
-}
+
 }

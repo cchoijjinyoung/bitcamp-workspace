@@ -6,11 +6,10 @@ public class Exam0142 {
 
     Object obj = new String("Hello");
 
-    // obj가 String 객체를 가리키더라도
-    // obj의 타입이 오브젝트이기 때문에 오브젝트에 선언한 멤버만 사용할 수 있다.
-    // obj가 가리키는 원래 클래스의 메서드를 호출하고 싶다면
+    // obj를 통해 원래 클래스의 메서드를 호출하고 싶다면
     // 다음과 같이 원래 타입으로 형변환하라.
     String str = ((String) obj).toLowerCase();
+    System.out.println(obj);
     System.out.println(str);
 
     // 또는 다음과 같이 원래 타입의 레퍼런스에 저장한 다음 사용하라.

@@ -8,4 +8,5 @@ public class Exam0170 {
     
     age = 30;
   }
+
 }
