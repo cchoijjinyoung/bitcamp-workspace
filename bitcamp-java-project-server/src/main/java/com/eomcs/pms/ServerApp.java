@@ -11,8 +11,10 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import com.eomcs.context.ApplicationContextListener;
+import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.listener.AppInitListener;
 import com.eomcs.pms.listener.DataHandlerListener;
+import com.eomcs.pms.listener.RequestMappingListener;
 
 //Stateful
 // 클라이언트 Quit 후 연결 끊어주기.
@@ -20,7 +22,7 @@ public class ServerApp {
 
   static boolean stop = false;
 
-  Map<String,Object> context = new Hashtable<>();
+  static Map<String,Object> context = new Hashtable<>();
   List<ApplicationContextListener> listeners = new ArrayList<>();
 
   public void addApplicationContextListener(ApplicationContextListener listener) {
@@ -69,6 +71,7 @@ public class ServerApp {
       ServerApp sa = new ServerApp();
       sa.addApplicationContextListener(new AppInitListener());
       sa.addApplicationContextListener(new DataHandlerListener());
+      sa.addApplicationContextListener(new RequestMappingListener());
       sa.service(8888);
     }
 
@@ -83,7 +86,13 @@ public class ServerApp {
 
         while (true) {
           String request = in.readLine();
-          sendResponse(out, request);
+
+          Command command = (Command) context.get(request);
+          if (command != null) {
+            command.execute();
+          } else {
+          sendResponse(out, "해당 명령을 처리할 수 없습니다.");
+          }
           if (request.equalsIgnoreCase("quit"))
             break;
           else if (request.equalsIgnoreCase("stop")) {
