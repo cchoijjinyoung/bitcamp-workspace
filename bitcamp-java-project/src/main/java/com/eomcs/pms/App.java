@@ -1,16 +1,13 @@
 package com.eomcs.pms;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-import com.eomcs.context.ApplicationContextListener;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Project;
@@ -41,31 +38,12 @@ import com.eomcs.pms.listener.AppInitListener;
 import com.eomcs.pms.listener.DataHandlerListener;
 import com.eomcs.util.Prompt;
 
-public class App {
+
+public class App extends ServerApp {
 
   //Map<String,Object> context = new HashMap<>(); // key나 value에 null이 들어갈 수 있음.
-  Map<String,Object> context = new Hashtable<>();
-  List<ApplicationContextListener> listeners = new ArrayList<>();
 
-  public void addApplicationContextListener(ApplicationContextListener listener) {
-    listeners.add(listener);
-  }
 
-  public void removeApplicationContextListener(ApplicationContextListener listener) {
-    listeners.remove(listener);
-  }
-
-  private void notifyApplicationContextListenerOnServiceSrarted() {
-    for (ApplicationContextListener listener : listeners) {
-      listener.contextInitialized(context);
-    }
-  }
-
-  private void notifyApplicationContextListenerOnServiceStopped() {
-    for (ApplicationContextListener listener : listeners) {
-      listener.contextDestroyed(context);
-    }
-  }
 
   public static void main(String[] args) throws Exception {
     App app = new App();
