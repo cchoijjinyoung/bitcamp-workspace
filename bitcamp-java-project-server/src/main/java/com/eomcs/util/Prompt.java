@@ -13,15 +13,16 @@ public class Prompt {
     System.out.print(title);
     return keyboardScan.nextLine();
   }
+
   public static String inputString(
       String title,
       PrintWriter out,
       BufferedReader in) throws Exception {
-    out.print(title);
-    out.print("!{}!");
+    out.println(title);
+    out.println("!{}!");
+    out.flush();
     return in.readLine();
   }
-
   public static int inputInt(String title) {
     return Integer.parseInt(inputString(title));
   }
@@ -29,12 +30,21 @@ public class Prompt {
   public static int inputInt(
       String title,
       PrintWriter out,
-      BufferedReader in) {
-    return Integer.parseInt(inputString(title));
+      BufferedReader in) throws Exception {
+
+    return Integer.parseInt(inputString(title, out, in));
   }
+
 
   public static Date inputDate(String title) {
     return Date.valueOf(inputString(title));
+  }
+
+  public static Date inputDate(String title,
+      PrintWriter out,
+      BufferedReader in) throws Exception {
+
+    return Date.valueOf(inputString(title, out, in));
   }
 
   // 프롬프트의 사용이 모두 끝났으면
@@ -42,5 +52,4 @@ public class Prompt {
   public static void close() {
     keyboardScan.close();
   }
-
 }

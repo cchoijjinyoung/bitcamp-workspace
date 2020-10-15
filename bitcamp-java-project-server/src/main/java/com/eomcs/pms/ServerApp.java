@@ -18,6 +18,7 @@ import com.eomcs.pms.listener.RequestMappingListener;
 
 //Stateful
 // 클라이언트 Quit 후 연결 끊어주기.
+
 public class ServerApp {
 
   static boolean stop = false;
@@ -84,22 +85,24 @@ public class ServerApp {
           BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
           PrintWriter out = new PrintWriter(socket.getOutputStream())) {
 
-        while (true) {
           String request = in.readLine();
+
+          if (request.equalsIgnoreCase("stop")) {
+            stop = true;
+            out.println("서버를 종료하는 중입니다!");
+            out.println();
+            out.flush();
+            return;
+          }
 
           Command command = (Command) context.get(request);
           if (command != null) {
-            command.execute();
+            command.execute(out, in);
           } else {
-          sendResponse(out, "해당 명령을 처리할 수 없습니다.");
+          out.println("해당 명령을 처리할 수 없습니다.");
           }
-          if (request.equalsIgnoreCase("quit"))
-            break;
-          else if (request.equalsIgnoreCase("stop")) {
-            stop = true;
-            break;
-        }
-        }
+          out.println(); //응답의 끝을 알리는 빈 문자열을 보낸다.
+          out.flush(); //flush 도 잊지말자.
 
       } catch (Exception e) {
         System.out.println("클라이언트와의 통신 오류!");
