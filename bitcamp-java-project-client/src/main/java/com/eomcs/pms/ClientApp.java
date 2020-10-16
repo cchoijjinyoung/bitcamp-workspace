@@ -68,15 +68,15 @@ public class ClientApp {
 
         } catch (Exception e) {
 
-        }
       }
     }
-}
 
-    private static void request(String command) {
+
+
+
+    private static void request(String message) {
       boolean stop = false;
 
-    }
     private static void receiveResponse(PrintWriter out, BufferedReader in) throws Exception {
       while (true) {
         String response = in.readLine();
