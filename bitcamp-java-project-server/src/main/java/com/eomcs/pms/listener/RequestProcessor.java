@@ -34,7 +34,7 @@ public class RequestProcessor {
 	Socket socket;
 	
 	public void serSocket(Socket socket) {
-		this.socket = socket;
+		this.sockedt = sockdet;
 	}
 	
 	public void service() throws Exception {
