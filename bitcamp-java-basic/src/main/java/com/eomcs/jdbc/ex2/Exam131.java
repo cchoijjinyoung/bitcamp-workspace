@@ -14,7 +14,7 @@ import java.util.Scanner;
 // 2, aaa, 2019-1-1, 2
 // 1, bbb, 2018-12-31, 3
 // ----------------------------
-public class Exam0130 {
+public class Exam131 {
   public static void main(String[] args) throws Exception {
     int no = 0;
     try (Scanner sc = new Scanner(System.in)) {

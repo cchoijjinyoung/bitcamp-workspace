@@ -12,7 +12,7 @@ public class Exam0320 {
           "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
         java.sql.Statement stmt = con.createStatement();
         java.sql.ResultSet rs = stmt.executeQuery(
-            "select * from x_board order by board_id desc"))
+            "select * from x_board order by board_id asc"))
     // 서버에서 결과의 집합을 가져온게 아니다!!!! 헷갈리지말자
     // 서버에서 결과를 가져오는 일을 할 뿐이다.
     {
@@ -35,13 +35,14 @@ public class Exam0320 {
 
       // 마리아디비의 커넥션 객체가 리턴하는 statement구현체의 이름은?
 
-      int count = stmt.executeUpdate(
-          "insert into x_board(title,contents) values('제목10','내용')");
-      System.out.printf("%d 개 입력성공!", count);
-    } catch (Exception e) {
-      e.printStackTrace();
-      }
+//      int count = stmt.executeUpdate(
+//          "insert into x_board(title,contents) values('제목10','내용')");
+//      System.out.printf("%d 개 입력성공!", count);
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//      }
     }
   }
+}
 
 

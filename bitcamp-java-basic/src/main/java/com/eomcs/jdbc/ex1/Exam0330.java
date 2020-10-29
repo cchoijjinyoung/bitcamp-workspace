@@ -35,11 +35,11 @@ public class Exam0330 {
 
       // 마리아디비의 커넥션 객체가 리턴하는 statement구현체의 이름은?
 
-      int count = stmt.executeUpdate(
-          "insert into x_board(title,contents) values('제목10','내용')");
-      System.out.printf("%d 개 입력성공!", count);
-    } catch (Exception e) {
-      e.printStackTrace();
+//      int count = stmt.executeUpdate(
+//          "insert into x_board(title,contents) values('제목10','내용')");
+//      System.out.printf("%d 개 입력성공!", count);
+//    } catch (Exception e) {
+//      e.printStackTrace();
       }
     }
   }
