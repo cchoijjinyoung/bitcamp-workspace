@@ -3,7 +3,7 @@ package com.eomcs.jdbc.ex1;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class Exam0310 {
+public class Exam0350 {
   public static void main(String[] args) throws Exception {
 
     // Connection 은 AutoCloserble 인터페이스를 구현했기 때문에 try안에 넣을수있다.
@@ -16,7 +16,8 @@ public class Exam0310 {
       // 마리아디비의 커넥션 객체가 리턴하는 statement구현체의 이름은?
 
       int count = stmt.executeUpdate(
-          "insert into x_board(title,contents) values('제목10','내용')");
+          "update x_board set view_count = view_count + 20"
+              + "where board_id > 3");
       System.out.printf("%d 개 입력성공!", count);
     } catch (Exception e) {
       e.printStackTrace();
