@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.Scanner;
 public class Exam0310 {
-  public void main(String[] args) throws Exception {
+  public static void main(String[] args) throws Exception {
   String title = null;
   String contents = null;
 
