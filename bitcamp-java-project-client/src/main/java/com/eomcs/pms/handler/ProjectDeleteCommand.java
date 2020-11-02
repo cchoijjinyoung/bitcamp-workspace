@@ -23,6 +23,10 @@ public class ProjectDeleteCommand implements Command {
         PreparedStatement stmt = con.prepareStatement(
             "delete from pms_project where no=?")) {
 
+    try (PreparedStatement stmt2 = con.prepareStatement(
+          "delete from pms_member_project where project_no = no")) {
+          stmt2.executeUpdate();
+      }
       stmt.setInt(1, no);
 
       int count = stmt.executeUpdate();
