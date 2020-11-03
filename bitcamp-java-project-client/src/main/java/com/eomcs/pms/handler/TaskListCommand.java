@@ -14,16 +14,16 @@ public class TaskListCommand implements Command {
     try (Connection con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/studydb?user=study&password=1111");
         PreparedStatement stmt = con.prepareStatement(
-            "select no, t.content, t.deadline, t.owner, t.status, m.name owner_name"
+            "select t.no, t.content, t.deadline, t.owner, t.status, m.name owner_name"
                 + " from pms_task t inner join pms_member m on t.owner=m.no"
-                + " order by deadline asc")) {
+                + " order by t.deadline asc")) {
 
       try (ResultSet rs = stmt.executeQuery()) {
         System.out.println("번호, 작업내용, 마감일, 작업자, 상태");
 
         while (rs.next()) {
           String stateLabel = null;
-          switch (rs.getInt("owner_name")) {
+          switch (rs.getInt("status")) {
             case 1:
               stateLabel = "진행중";
               break;
@@ -37,7 +37,7 @@ public class TaskListCommand implements Command {
               rs.getInt("no"),
               rs.getString("content"),
               rs.getDate("deadline"),
-              rs.getString("owner"),
+              rs.getString("owner_name"),
               stateLabel);
         }
       }

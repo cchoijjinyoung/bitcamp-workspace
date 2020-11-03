@@ -29,18 +29,20 @@ public class ProjectUpdateCommand implements Command {
         "jdbc:mysql://localhost:3306/studydb?user=study&password=1111");
         PreparedStatement stmt = con.prepareStatement(
             "select p.title, p.content, p.sdt, p.edt, p.owner, m.name owner_name"
-                + " from pms_project p inner join pms_member m on p.owner = m.no"
+                + " from pms_project p inner join pms_member m on p.owner=m.no"
                 + " where p.no = ?")) {
 
       stmt.setInt(1, no);
-      StringBuilder members = new StringBuilder();
+
       try (ResultSet rs = stmt.executeQuery()) {
         if (rs.next()) {
+          project.setNo(no);
           project.setTitle(rs.getString("title"));
           project.setContent(rs.getString("content"));
           project.setStartDate(rs.getDate("sdt"));
           project.setEndDate(rs.getDate("edt"));
 
+          // 관리자 정보를 가져와서 프로젝트 객체에 담는다.
           Member owner = new Member();
           owner.setNo(rs.getInt("owner"));
           owner.setName(rs.getString("owner_name"));
@@ -83,11 +85,10 @@ public class ProjectUpdateCommand implements Command {
       }
     }
 
+    // 프로젝트에 참여할 회원 정보를 담는다.
     List<Member> members = new ArrayList<>();
-
     while (true) {
       String name = Prompt.inputString("팀원?(완료: 빈 문자열) ");
-
       if (name.length() == 0) {
         break;
       } else {
@@ -95,7 +96,7 @@ public class ProjectUpdateCommand implements Command {
         if (member == null) {
           System.out.println("등록된 회원이 아닙니다.");
           continue;
-      }
+        }
         members.add(member);
       }
     }
@@ -130,20 +131,25 @@ public class ProjectUpdateCommand implements Command {
         System.out.println("해당 번호의 프로젝트가 존재하지 않습니다.");
         return;
       }
-      // 기존 프로젝트 팀원 모두 삭제 -> 새로 팀원 입력
+
+      // 프로젝트 팀원 변경한다.
+      // => 기존에 설정된 모든 팀원을 삭제한다.
       try (PreparedStatement stmt2 = con.prepareStatement(
-          "delete from pms_member_project where project_no = " + project.getNo())) {
-          stmt2.executeUpdate();
-      }
-      try (PreparedStatement stmt2 = con.prepareStatement(
-          "insert into pms_member_project(member_no, project_no) values(?, ?)")) {
-        for (Member member : project.getMembers()) {
-        stmt2.setInt(1,  member.getNo());
-        stmt2.setInt(2, project.getNo());
+          "delete from pms_member_project where project_no=" + project.getNo())) {
         stmt2.executeUpdate();
+      }
+      // => 새로 팀원을 입력한다.
+      try (PreparedStatement stmt2 = con.prepareStatement(
+          "insert into pms_member_project(member_no, project_no) values(?,?)")) {
+        for (Member member : project.getMembers()) {
+          stmt2.setInt(1, member.getNo());
+          stmt2.setInt(2, project.getNo());
+          stmt2.executeUpdate();
         }
       }
-        System.out.println("프로젝트를 변경하였습니다.");
+
+      System.out.println("프로젝트를 변경하였습니다.");
+
     } catch (Exception e) {
       System.out.println("프로젝트 변경 중 오류 발생!");
       e.printStackTrace();

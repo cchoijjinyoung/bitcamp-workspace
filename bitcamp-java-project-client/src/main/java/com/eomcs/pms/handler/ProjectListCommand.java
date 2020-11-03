@@ -19,23 +19,25 @@ public class ProjectListCommand implements Command {
                 + " order by p.no desc")) {
 
       try (ResultSet rs = stmt.executeQuery()) {
-
         System.out.println("번호, 프로젝트명, 시작일 ~ 종료일, 관리자, 팀원");
+
         while (rs.next()) {
           StringBuilder members = new StringBuilder();
           try (PreparedStatement stmt2 = con.prepareStatement(
               "select mp.member_no, m.name"
-              + " from pms_member_project mp"
-              + " inner join pms_member m on mp.member_no=m.no"
-              + " where mp.project_no=" + rs.getInt("no"));
-            ResultSet memberRs = stmt2.executeQuery()) {
-          while (memberRs.next()) {
-            if (members.length() > 0) {
-              members.append(",");
+                  + " from pms_member_project mp"
+                  + " inner join pms_member m on mp.member_no=m.no"
+                  + " where mp.project_no=" + rs.getInt("no"));
+              ResultSet memberRs = stmt2.executeQuery()) {
+
+            while (memberRs.next()) {
+              if (members.length() > 0) {
+                members.append(",");
+              }
+              members.append(memberRs.getString("name"));
             }
-            members.append(memberRs.getString("name"));
           }
-          }
+
           System.out.printf("%d, %s, %s ~ %s, %s, [%s]\n",
               rs.getInt("no"),
               rs.getString("title"),
