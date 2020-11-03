@@ -19,7 +19,7 @@ no int not null,
 content text not null,
 sdt date not null,
 edt date not null,
-ownet int not null
+owner int not null
 );
 
 alter table pms_project
@@ -43,4 +43,27 @@ add constraint pms_member_project_fk2 foreign key(project_no) references pms_pro
 //
 alter table pms_task
 add constraint pms_task_fk foreign key(owner) references pms_member(no);
+
+create table pms_task(
+  no int not null,
+  content text not null,
+  deadline date not null,
+  owner int not null,   /* pms_member 의 PK 컬럼을 가리키는 외부키다*/
+  project_no int not null, /* pms_project 의 PK 컬럼을 가리키는 외부키다*/
+  status int default 0
+);
+
+alter table pms_task
+add constraint pms_task_fk1 foreign key(owner) references pms_member(no);
+
+alter table pms_task
+add constraint pms_task_fk2 foreign key(project_no) references pms_project(no);
+
+////
+
+add constraint pms_task_fk1 (owner) pms_member(no);
+
+alter table pms_task
+add constraint pms_task_fk3 foreign key(owner, project_no) references pms_member_project(member_no, project_no);
+
 

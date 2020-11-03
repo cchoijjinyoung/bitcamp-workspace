@@ -16,8 +16,8 @@ public class TaskDetailCommand implements Command {
     try (Connection con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/studydb?user=study&password=1111");
         PreparedStatement stmt = con.prepareStatement(
-            "select content, deadline, owner, status"
-                + " from pms_task"
+            "select t.content, t.deadline, t.owner, t.status, m.name owner_name"
+                + " from pms_task t inner join pms_member m on t.owner = m.no"
                 + " where no = ?")) {
 
       stmt.setInt(1, no);
@@ -27,7 +27,7 @@ public class TaskDetailCommand implements Command {
           System.out.printf("내용: %s\n", rs.getString("content"));
           System.out.printf("마감일: %s\n", rs.getDate("deadline"));
           String stateLabel = null;
-          switch (rs.getInt("status")) {
+          switch (rs.getInt("owner_name")) {
             case 1:
               stateLabel = "진행중";
               break;

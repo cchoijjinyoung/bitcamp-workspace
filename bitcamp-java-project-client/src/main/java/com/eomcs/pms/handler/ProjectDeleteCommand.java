@@ -24,7 +24,8 @@ public class ProjectDeleteCommand implements Command {
             "delete from pms_project where no=?")) {
 
     try (PreparedStatement stmt2 = con.prepareStatement(
-          "delete from pms_member_project where project_no = no")) {
+          "delete from pms_member_project where project_no = ?")) {
+          stmt2.setInt(1, no);
           stmt2.executeUpdate();
       }
       stmt.setInt(1, no);
