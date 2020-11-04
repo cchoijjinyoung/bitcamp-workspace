@@ -18,8 +18,6 @@ public class MemberListCommand implements Command {
                 + " order by no desc")) {
       try (ResultSet rs = stmt.executeQuery()) {
         while (rs.next()) {
-          rs.getInt("no"),
-          rs.getString("name"),
 
         }
       }

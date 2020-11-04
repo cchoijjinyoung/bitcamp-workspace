@@ -42,13 +42,13 @@ public class BoardDao {
         "jdbc:mysql://localhost:3306/studydb?user=study&password=1111");
         PreparedStatement stmt = con.prepareStatement(
             "select"
-            + " b.no,"
-            + " b.title,"
-            + " b.content,"
-            + " b.cdt,"
-            + " b.vw_cnt,"
-            + " m.no writer_no,"
-            + " m.name"
+                + " b.no,"
+                + " b.title,"
+                + " b.content,"
+                + " b.cdt,"
+                + " b.vw_cnt,"
+                + " m.no writer_no,"
+                + " m.name"
                 + " from pms_board b inner join pms_member m on b.writer=m.no"
                 + " where b.no = ?")) {
 
@@ -59,18 +59,14 @@ public class BoardDao {
           board.setNo(rs.getInt("no"));
           board.setTitle(rs.getString("title"));
           board.setContent(rs.getString("content"));
+
           Member member = new Member();
           member.setNo(rs.getInt("writer_no"));
           member.setName(rs.getString("name"));
           board.setWriter(member);
 
           board.setRegisteredDate(rs.getDate("cdt"));
-          board.setViewCount(rs.getInt("vw_cnt") +1);
-          System.out.printf("제목: %s\n", rs.getString("title"));
-          System.out.printf("내용: %s\n", rs.getString("content"));
-          System.out.printf("작성자: %s\n", rs.getString("name"));
-          System.out.printf("등록일: %s\n", rs.getDate("cdt"));
-          System.out.printf("조회수: %d\n", rs.getInt("vw_cnt") + 1);
+          board.setViewCount(rs.getInt("vw_cnt") + 1);
 
           try (PreparedStatement stmt2 = con.prepareStatement(
               "update pms_board set vw_cnt = vw_cnt + 1"
@@ -86,7 +82,7 @@ public class BoardDao {
     }
   }
 
-  public List<Board> findAll()throws Exception {
+  public List<Board> findAll() throws Exception {
     try (Connection con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/studydb?user=study&password=1111");
         PreparedStatement stmt = con.prepareStatement(
@@ -95,6 +91,7 @@ public class BoardDao {
                 + " order by b.no desc")) {
 
       try (ResultSet rs = stmt.executeQuery()) {
+
         ArrayList<Board> list = new ArrayList<>();
 
         while (rs.next()) {
@@ -116,6 +113,7 @@ public class BoardDao {
       }
     }
   }
+
   public int update(Board board) throws Exception {
     try (Connection con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/studydb?user=study&password=1111");
@@ -126,9 +124,9 @@ public class BoardDao {
       stmt.setString(2, board.getContent());
       stmt.setInt(3, board.getNo());
       return stmt.executeUpdate();
-      }
     }
   }
+}
 
 
 
