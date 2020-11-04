@@ -29,21 +29,11 @@ public class ProjectDetailCommand implements Command {
           project.getStartDate(),
           project.getEndDate());
       System.out.printf("관리자: %s\n", project.getOwner().getName());
-      System.out.println("팀원: ");
-      boolean firstMember = true;
-      project.getMembers().forEach(member -> {
-        System.out.print(member.getName() + " ");
-      });
+      System.out.print("팀원: ");
+      project.getMembers().forEach(
+          member -> System.out.print(member.getName() + " "));
       System.out.println();
 
-//      for (Member member : project.getMembers()) {
-//        if (!firstMember) {
-//          System.out.print(",");
-//        }
-//        System.out.print(member.getName());
-//        firstMember = false;
-//      }
-//      System.out.println();
     } catch (Exception e) {
       System.out.println("프로젝트 조회 중 오류 발생!");
       e.printStackTrace();

@@ -86,7 +86,12 @@ public class BoardDao {
     try (Connection con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/studydb?user=study&password=1111");
         PreparedStatement stmt = con.prepareStatement(
-            "select b.no, b.title, b.cdt, b.vw_cnt, m.no writer_no, m.name"
+            "select b.no,"
+            + " b.title,"
+            + " b.cdt,"
+            + " b.vw_cnt,"
+            + " m.no writer_no,"
+            + " m.name"
                 + " from pms_board b inner join pms_member m on b.writer=m.no"
                 + " order by b.no desc")) {
 
