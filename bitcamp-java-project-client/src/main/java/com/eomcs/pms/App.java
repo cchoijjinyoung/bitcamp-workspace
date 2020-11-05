@@ -27,6 +27,7 @@ import com.eomcs.pms.handler.BoardListCommand;
 import com.eomcs.pms.handler.BoardUpdateCommand;
 import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.HelloCommand;
+import com.eomcs.pms.handler.LoginCommand;
 import com.eomcs.pms.handler.MemberAddCommand;
 import com.eomcs.pms.handler.MemberDeleteCommand;
 import com.eomcs.pms.handler.MemberDetailCommand;
@@ -44,7 +45,6 @@ import com.eomcs.pms.handler.TaskListCommand;
 import com.eomcs.pms.handler.TaskUpdateCommand;
 import com.eomcs.pms.listener.AppInitListener;
 import com.eomcs.util.Prompt;
-
 public class App {
 
   // 옵저버와 공유할 맵 객체
@@ -134,10 +134,10 @@ public class App {
     commandMap.put("/task/delete", new TaskDeleteCommand(taskDao));
 
     commandMap.put("/hello", new HelloCommand());
+    commandMap.put("/login", new LoginCommand(memberDao));
 
     Deque<String> commandStack = new ArrayDeque<>();
     Queue<String> commandQueue = new LinkedList<>();
-
     loop:
       while (true) {
         String inputStr = Prompt.inputString("명령> ");

@@ -16,6 +16,8 @@ public class ProjectDaoImpl implements com.eomcs.pms.dao.ProjectDao {
   }
   @Override
   public int insert(Project project) throws Exception {
+    con.setAutoCommit(false);
+    try {
       try (PreparedStatement stmt = con.prepareStatement(
           "insert into pms_project(title,content,sdt,edt,owner)"
               + " values(?,?,?,?,?)",
@@ -47,11 +49,24 @@ public class ProjectDaoImpl implements com.eomcs.pms.dao.ProjectDao {
           stmt2.executeUpdate();
         }
       }
+      con.commit();
       return 1;
+    } catch (Exception e) { // 작업을 수행하는 중에 예외가 발생하면
+      // 이전에 수행했던 작업도 되돌린다.
+      // 즉 마지막 커밋 상태로 되돌린다.
+      con.rollback();
+      // 예외가 발생하면 여기서 처리하지말고 호출자에게 떠넘긴다.
+      throw e;
+    } finally {
+      // 정상적으로 실행하거나 예외가 발생하더라도 DB커넥션은 다시 원래의 auto commit 상태로 만든다
+      con.setAutoCommit(true);
     }
+  }
 
   @Override
   public int delete(int no) throws Exception {
+    con.setAutoCommit(false);
+    try {
       // => 프로젝트의 작업을 지운다.
       try (PreparedStatement stmt = con.prepareStatement(
           "delete from pms_task where project_no=" + no)) {
@@ -65,11 +80,20 @@ public class ProjectDaoImpl implements com.eomcs.pms.dao.ProjectDao {
       }
 
       // => 프로젝트를 삭제한다.
+      int count = 0;
       try (PreparedStatement stmt = con.prepareStatement(
           "delete from pms_project where no=?")) {
         stmt.setInt(1, no);
-        return stmt.executeUpdate();
+        count = stmt.executeUpdate();
       }
+      con.commit();
+      return count;
+    } catch(Exception e) {
+      con.rollback();
+      throw e;
+    } finally {
+      con.setAutoCommit(true);
+    }
     }
 
   @Override
@@ -172,6 +196,9 @@ public class ProjectDaoImpl implements com.eomcs.pms.dao.ProjectDao {
 
   @Override
   public int update(Project project) throws Exception {
+
+    con.setAutoCommit(false);
+    try {
       try (PreparedStatement stmt = con.prepareStatement(
           "update pms_project set"
               + " title = ?,"
@@ -210,7 +237,13 @@ public class ProjectDaoImpl implements com.eomcs.pms.dao.ProjectDao {
           stmt.executeUpdate();
         }
       }
-
+      con.commit();
       return 1;
-    }
+    } catch(Exception e) {
+      con.rollback();
+      throw e;
+  } finally {
+    con.setAutoCommit(true);
   }
+  }
+}
