@@ -1,5 +1,6 @@
 package com.eomcs.pms;
 
+import java.sql.Connection;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -15,6 +16,10 @@ import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.dao.ProjectDao;
 import com.eomcs.pms.dao.TaskDao;
+import com.eomcs.pms.dao.mariadb.BoardDaoImpl;
+import com.eomcs.pms.dao.mariadb.MemberDaoImpl;
+import com.eomcs.pms.dao.mariadb.ProjectDaoImpl;
+import com.eomcs.pms.dao.mariadb.TaskDaoImpl;
 import com.eomcs.pms.handler.BoardAddCommand;
 import com.eomcs.pms.handler.BoardDeleteCommand;
 import com.eomcs.pms.handler.BoardDetailCommand;
@@ -96,11 +101,13 @@ public class App {
 
     Map<String,Command> commandMap = new HashMap<>();
 
+    // AppinitListener 가 준비한 커넥션 객체를 꺼낸다.
+    Connection con = (Connection) context.get("con");
 
-    BoardDao boardDao = new BoardDao();
-    MemberDao memberDao = new MemberDao();
-    ProjectDao projectDao = new ProjectDao();
-    TaskDao taskDao = new TaskDao();
+    BoardDao boardDao = new BoardDaoImpl(con);
+    MemberDao memberDao = new MemberDaoImpl(con);
+    ProjectDao projectDao = new ProjectDaoImpl(con);
+    TaskDao taskDao = new TaskDaoImpl(con);
 
     commandMap.put("/board/add", new BoardAddCommand(boardDao, memberDao));
     commandMap.put("/board/list", new BoardListCommand(boardDao));
