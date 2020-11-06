@@ -2,6 +2,7 @@ package com.eomcs.pms.handler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.dao.ProjectDao;
 import com.eomcs.pms.domain.Member;
@@ -19,7 +20,7 @@ public class ProjectAddCommand implements Command {
   }
 
   @Override
-  public void execute() {
+  public void execute(Map<String,Object> context) {
     System.out.println("[프로젝트 등록]");
 
     try {
@@ -28,6 +29,9 @@ public class ProjectAddCommand implements Command {
       project.setContent(Prompt.inputString("내용? "));
       project.setStartDate(Prompt.inputDate("시작일? "));
       project.setEndDate(Prompt.inputDate("종료일? "));
+
+      Member loginUser = (Member) context.get("loginUser");
+        project.setOwner(loginUser);
 
       while (true) {
         String name = Prompt.inputString("관리자?(취소: 빈 문자열) ");

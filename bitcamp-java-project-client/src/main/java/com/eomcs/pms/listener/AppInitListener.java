@@ -15,8 +15,9 @@ public class AppInitListener implements ApplicationContextListener {
       Connection con = DriverManager.getConnection(
           "jdbc:mysql://localhost:3306/studydb?user=study&password=1111");
       context.put("con", con);
-    } catch(Exception e) {
-      System.out.println("커넥션을 준비하는 중에 오류 발생!");
+
+    } catch (Exception e) {
+      System.out.println("DB 커넥션을 준비하는 중에 오류 발생");
       e.printStackTrace();
     }
   }
@@ -28,7 +29,8 @@ public class AppInitListener implements ApplicationContextListener {
     try {
       Connection con = (Connection) context.get("con");
       con.close();
-    } catch(Exception e) {
+    } catch (Exception e) {
+      // 커넥션을 닫다가 오류가 발생하더라도 무시한다.
+    }
   }
-}
 }
