@@ -53,7 +53,7 @@ public class BoardDaoImpl implements com.eomcs.pms.dao.BoardDao{
             + " m.no writer_no,"
             + " m.name"
             + " from pms_board b inner join pms_member m on b.writer=m.no"
-            + " where b.no = ?")) {
+            + " where b.no= ?")) {
 
       stmt.setInt(1, no);
       try (ResultSet rs = stmt.executeQuery()) {
