@@ -21,9 +21,9 @@ import com.eomcs.pms.dao.mariadb.BoardDaoImpl;
 import com.eomcs.pms.dao.mariadb.MemberDaoImpl;
 import com.eomcs.pms.dao.mariadb.ProjectDaoImpl;
 import com.eomcs.pms.dao.mariadb.TaskDaoImpl;
-import com.eomcs.pms.filter.AuthCommandFilter;
 import com.eomcs.pms.filter.CommandFilterManager;
 import com.eomcs.pms.filter.DefaultCommandFilter;
+import com.eomcs.pms.filter.FilterChain;
 import com.eomcs.pms.filter.LogCommandFilter;
 import com.eomcs.pms.handler.BoardAddCommand;
 import com.eomcs.pms.handler.BoardDeleteCommand;
@@ -145,23 +145,30 @@ public class App {
     commandMap.put("/hello", new HelloCommand());
 
     commandMap.put("/login", new LoginCommand(memberDao));
-    commandMap.put("/logout", new LogoutCommand());
     commandMap.put("/whoami", new WhoamiCommand());
+    commandMap.put("/logout", new LogoutCommand());
 
     // commandMap 객체를 context 맵에 보관한다.
-    // => 필터나 커멘드 객체가 사용할 수 있기 때문이다.
+    // => 필터나 커맨드 객체가 사용할 수 있기 때문이다.
     context.put("commandMap", commandMap);
 
     // 필터 관리자 준비
     CommandFilterManager filterManager = new CommandFilterManager();
 
     // 필터를 등록한다.
-    filterManager.add(new LogCommandFilter(new File("Command.log")));
-    filterManager.add(new AuthCommandFilter());
+    filterManager.add(new LogCommandFilter());
+    //filterManager.add(new AuthCommandFilter());
     filterManager.add(new DefaultCommandFilter());
 
-    //  필터들을 준비시킨다.
+    // 필터가 사용할 값을 context 맵에 담는다.
+    File logFile = new File("command.log");
+    context.put("logFile", logFile);
+
+    // 필터들을 준비시킨다.
     filterManager.init(context);
+
+    // 사용자가 입력한 명령을 처리할 필터 체인을 얻는다.
+    FilterChain filterChain = filterManager.getFilterChains();
 
     Deque<String> commandStack = new ArrayDeque<>();
     Queue<String> commandQueue = new LinkedList<>();
@@ -185,19 +192,20 @@ public class App {
             System.out.println("안녕!");
             break loop;
           default:
-            // 커멘드나 필터가 사용할 객체를 준비한다.
+            // 커맨드나 필터가 사용할 객체를 준비한다.
             Request request = new Request(inputStr, context);
 
-            filterManager.reset(); // 실행할 필터의 인덱스를 0으로 초기화시킨다
-            filterManager.doFilter(request);
-
+            // 필터들의 체인을 실행한다.
+            if (filterChain != null) {
+              filterChain.doFilter(request);
+            }
         }
         System.out.println();
       }
     Prompt.close();
 
-    // 필터들을 마무리 시킨다.
-    filterManager.destoy();
+    // 필터들을 마무리시킨다.
+    filterManager.destroy();
 
     notifyApplicationContextListenerOnServiceStopped();
   }
@@ -217,5 +225,4 @@ public class App {
       System.out.println("history 명령 처리 중 오류 발생!");
     }
   }
-
 }
