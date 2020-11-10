@@ -1,81 +1,186 @@
 package com.eomcs.pms.dao.mariadb;
 
-import java.util.HashMap;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import com.eomcs.pms.domain.Member;
 
 public class MemberDaoImpl implements com.eomcs.pms.dao.MemberDao {
 
-  SqlSessionFactory sqlSessionFactory;
+  Connection con;
 
-  public MemberDaoImpl(SqlSessionFactory sqlSessionFactory) {
-    this.sqlSessionFactory = sqlSessionFactory;
+  public MemberDaoImpl(Connection con) {
+    this.con = con;
   }
 
   @Override
   public int insert(Member member) throws Exception {
-    try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
-      return sqlSession.insert("MemberDao.insert", member);
+    try (PreparedStatement stmt = con.prepareStatement(
+        "insert into pms_member(name,email,password,photo,tel)"
+            + " values(?,?,password(?),?,?)")) {
+
+      stmt.setString(1, member.getName());
+      stmt.setString(2, member.getEmail());
+      stmt.setString(3, member.getPassword());
+      stmt.setString(4, member.getPhoto());
+      stmt.setString(5, member.getTel());
+      return stmt.executeUpdate();
     }
   }
 
   @Override
   public int delete(int no) throws Exception {
-    try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
-      return sqlSession.delete("MemberDao.delete", no);
+    try (PreparedStatement stmt = con.prepareStatement(
+        "delete from pms_member where no=?")) {
+
+      stmt.setInt(1, no);
+      return stmt.executeUpdate();
     }
   }
 
   @Override
   public Member findByNo(int no) throws Exception {
-    try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
-      return sqlSession.selectOne("MemberDao.findByNo", no);
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select no, name, email, photo, tel, cdt"
+            + " from pms_member"
+            + " where no = ?")) {
+
+      stmt.setInt(1, no);
+
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (rs.next()) {
+          Member member = new Member();
+          member.setNo(rs.getInt("no"));
+          member.setName(rs.getString("name"));
+          member.setEmail(rs.getString("email"));
+          member.setPhoto(rs.getString("photo"));
+          member.setTel(rs.getString("tel"));
+          member.setRegisteredDate(rs.getDate("cdt"));
+          return member;
+        } else {
+          return null;
+        }
+      }
     }
   }
 
   @Override
   public Member findByName(String name) throws Exception {
-    try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
-      List<Member> members = sqlSession.selectList("MemberDao.findByName", name);
-      if (members.size() > 0) {
-        return members.get(0);
-      } else {
-        return null;
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select no, name, email, photo, tel, cdt"
+            + " from pms_member"
+            + " where name = ?")) {
+
+      stmt.setString(1, name);
+
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (rs.next()) {
+          Member member = new Member();
+          member.setNo(rs.getInt("no"));
+          member.setName(rs.getString("name"));
+          member.setEmail(rs.getString("email"));
+          member.setPhoto(rs.getString("photo"));
+          member.setTel(rs.getString("tel"));
+          member.setRegisteredDate(rs.getDate("cdt"));
+          return member;
+        } else {
+          return null;
+        }
       }
     }
   }
 
   @Override
   public List<Member> findAll() throws Exception {
-    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-      return sqlSession.selectList("MemberDao.findAll");
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select no, name, email, tel, cdt"
+            + " from pms_member"
+            + " order by no desc")) {
+
+      try (ResultSet rs = stmt.executeQuery()) {
+        ArrayList<Member> list = new ArrayList<>();
+        while (rs.next()) {
+          Member member = new Member();
+          member.setNo(rs.getInt("no"));
+          member.setName(rs.getString("name"));
+          member.setEmail(rs.getString("email"));
+          member.setTel(rs.getString("tel"));
+          member.setRegisteredDate(rs.getDate("cdt"));
+          list.add(member);
+        }
+        return list;
+      }
     }
   }
 
   @Override
   public int update(Member member) throws Exception {
-    try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
-      return sqlSession.update("MemberDao.update", member);
+    try (PreparedStatement stmt = con.prepareStatement(
+        "update pms_member set"
+            + " name = ?,"
+            + " email = ?,"
+            + " password = password(?),"
+            + " photo = ?,"
+            + " tel = ?"
+            + " where no = ?")) {
+
+      stmt.setString(1, member.getName());
+      stmt.setString(2, member.getEmail());
+      stmt.setString(3, member.getPassword());
+      stmt.setString(4, member.getPhoto());
+      stmt.setString(5, member.getTel());
+      stmt.setInt(6, member.getNo());
+      return stmt.executeUpdate();
     }
   }
 
   @Override
   public List<Member> findByProjectNo(int projectNo) throws Exception {
-    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-      return sqlSession.selectList("MemberDao.findByProjectNo", projectNo);
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select mp.member_no, m.name"
+            + " from pms_member_project mp inner join pms_member m"
+            + " on mp.member_no=m.no"
+            + " where mp.project_no=" + projectNo
+            + " order by m.name asc");
+        ResultSet rs = stmt.executeQuery()) {
+
+      ArrayList<Member> members = new ArrayList<>();
+      while (rs.next()) {
+        Member member = new Member();
+        member.setNo(rs.getInt("member_no"));
+        member.setName(rs.getString("name"));
+        members.add(member);
+      }
+      return members;
     }
   }
 
   @Override
   public Member findByEmailPassword(String email, String password) throws Exception {
-    HashMap<String,Object> map = new HashMap<>();
-    map.put("email", email);
-    map.put("password", password);
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select no, name, email, photo, tel, cdt"
+            + " from pms_member"
+            + " where email = ? and password = password(?)")) {
 
-    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-      return sqlSession.selectOne("MemberDao.findByEmailPassword", map);
+      stmt.setString(1, email);
+      stmt.setString(2, password);
+
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (rs.next()) {
+          Member member = new Member();
+          member.setNo(rs.getInt("no"));
+          member.setName(rs.getString("name"));
+          member.setEmail(rs.getString("email"));
+          member.setPhoto(rs.getString("photo"));
+          member.setTel(rs.getString("tel"));
+          member.setRegisteredDate(rs.getDate("cdt"));
+          return member;
+        } else {
+          return null;
+        }
+      }
     }
   }
 }

@@ -51,19 +51,21 @@ public class AppInitListener implements ApplicationContextListener {
     try {
       Connection con = DriverManager.getConnection(
           "jdbc:mysql://localhost:3306/studydb?user=study&password=1111");
+      context.put("con", con);
 
-      // Mybatis 객체 준비
+
       SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(
           Resources.getResourceAsStream("com/eomcs/pms/conf/mybatis-config.xml"));
 
-      // DAO 구현체 생성
-      BoardDao boardDao = new BoardDaoImpl(sqlSessionFactory);
-      MemberDao memberDao = new MemberDaoImpl(sqlSessionFactory);
-      ProjectDao projectDao = new ProjectDaoImpl(con, sqlSessionFactory);
+      BoardDao boardDao = new BoardDaoImpl(con, sqlSessionFactory);
+      MemberDao memberDao = new MemberDaoImpl(con);
+      ProjectDao projectDao = new ProjectDaoImpl(con);
       TaskDao taskDao = new TaskDaoImpl(con);
 
-      // Command 구현체 생성 및 commandMap 객체 준비
       Map<String,Command> commandMap = new HashMap<>();
+
+      // AppInitListener 가 준비한 Connection 객체를 꺼낸다.
+
 
       commandMap.put("/board/add", new BoardAddCommand(boardDao, memberDao));
       commandMap.put("/board/list", new BoardListCommand(boardDao));
@@ -78,7 +80,7 @@ public class AppInitListener implements ApplicationContextListener {
       commandMap.put("/member/delete", new MemberDeleteCommand(memberDao));
 
       commandMap.put("/project/add", new ProjectAddCommand(projectDao, memberDao));
-      commandMap.put("/project/list", new ProjectListCommand(projectDao, memberDao));
+      commandMap.put("/project/list", new ProjectListCommand(projectDao));
       commandMap.put("/project/detail", new ProjectDetailCommand(projectDao));
       commandMap.put("/project/update", new ProjectUpdateCommand(projectDao, memberDao));
       commandMap.put("/project/delete", new ProjectDeleteCommand(projectDao));
@@ -95,10 +97,13 @@ public class AppInitListener implements ApplicationContextListener {
       commandMap.put("/whoami", new WhoamiCommand());
       commandMap.put("/logout", new LogoutCommand());
 
+      // commandMap 객체를 context 맵에 보관한다.
+      // => 필터나 커맨드 객체가 사용할 수 있기 때문이다.
       context.put("commandMap", commandMap);
 
+
     } catch (Exception e) {
-      System.out.println("시스템이 사용할 객체를 준비하는 중에 오류 발생");
+      System.out.println("DB 커넥션을 준비하는 중에 오류 발생");
       e.printStackTrace();
     }
   }

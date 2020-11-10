@@ -33,8 +33,6 @@
   <!-- SQL 문이 들어 있는 파일들 -->
   <mappers>
     <mapper resource="com/eomcs/pms/mapper/BoardMapper.xml"/>
-    <mapper resource="com/eomcs/pms/mapper/MemberMapper.xml"/>
-    <mapper resource="com/eomcs/pms/mapper/ProjectMapper.xml"/>
   </mappers>
 
 </configuration>
