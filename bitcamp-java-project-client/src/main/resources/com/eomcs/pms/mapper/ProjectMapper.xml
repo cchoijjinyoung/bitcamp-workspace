@@ -23,7 +23,7 @@
     </collection>
   </resultMap>
 
-  <select id="findAll" resultMap="ProjectMap">
+  <sql id="sql1">
     select 
       p.no, 
       p.title, 
@@ -39,23 +39,27 @@
       left outer join pms_member_project mp on p.no=mp.project_no
       left outer join pms_member m2 on mp.member_no=m2.no
     order by p.no desc
+    </sql>
+  <select id="findAll" resultMap="ProjectMap">
+  <include refid="sql1"></include>
   </select>
   
   <select id="findByKeyword" resultMap="ProjectMap" parameterType="map">
-    select 
-      p.no, 
-      p.title, 
-      p.sdt, 
-      p.edt, 
-      m.no owner_no, 
-      m.name owner_name,
-      mp.member_no,
-      m2.name member_name
-    from 
-      pms_project p 
-      inner join pms_member m on p.owner=m.no
-      left outer join pms_member_project mp on p.no=mp.project_no
-      left outer join pms_member m2 on mp.member_no=m2.no
+    <include refid="sql1"></include>
+    <where>
+    <choose>
+      <when test="item == 1">
+      p.title like concat('%', #{keyword}, '%')
+      </when>
+      <when test="item == 2">
+      m.name like concat('%', #{keyword}, '%')
+      </when>
+      <otherwise>
+      m2.name like concat('%', #{keyword}, '%')
+      </otherwise>
+    </choose>
+    </where>
+<!--  
     <if test="item == 1">
     where p.title like concat('%', #{keyword}, '%')
     </if>
@@ -65,6 +69,7 @@
     <if test="item == 3">
     where m2.name like concat('%', #{keyword}, '%')
     </if>
+-->
     order by p.no desc
   </select>
   
@@ -103,9 +108,17 @@
     values(#{title},#{content},#{startDate},#{endDate},#{owner.no})
   </insert>
   
+  <insert id="insertMembers" parameterType="project">
+    insert into pms_member_project(member_no, project_no) 
+    values
+    <foreach collection="members" item="member" separator=",">
+    (#{member_no},#{no}) <!-- member_no 는 멤버의 넘버 no 는 프로젝트 넘버를 뜻함 파라미터타입이 프로젝트니 -->
+    </foreach>
+  </insert>
+  
   <insert id="insertMember" parameterType="map">
     insert into pms_member_project(member_no, project_no) 
-    values(#{memberNo},#{projectNo})
+    values (#{memberNo},#{projectNo})
   </insert>
   
   <delete id="deleteMembers" parameterType="int">
