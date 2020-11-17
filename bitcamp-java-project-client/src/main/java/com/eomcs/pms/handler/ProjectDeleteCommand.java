@@ -33,7 +33,5 @@ public class ProjectDeleteCommand implements Command {
       System.out.println("프로젝트 삭제 중 오류 발생!");
       e.printStackTrace();
 
-    } finally {
     }
-  }
-}
+  }}
