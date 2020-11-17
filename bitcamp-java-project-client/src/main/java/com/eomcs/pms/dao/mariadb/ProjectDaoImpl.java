@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Project;
 
 public class ProjectDaoImpl implements com.eomcs.pms.dao.ProjectDao {
@@ -27,7 +26,6 @@ public class ProjectDaoImpl implements com.eomcs.pms.dao.ProjectDao {
       // 프로젝트의 멤버 정보 입력
       sqlSession.insert("ProjectDao.insertMembers", project);
 
-      sqlSession.commit();
       return count;
     }
   }
@@ -86,24 +84,8 @@ public class ProjectDaoImpl implements com.eomcs.pms.dao.ProjectDao {
   @Override
   public int update(Project project) throws Exception {
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-      int count = sqlSession.update("ProjectDao.update", project);
-      if (count == 0) {
-        return 0;
-      }
-
-      // 프로젝트 팀원 변경한다.
-      // => 기존에 설정된 모든 팀원을 삭제한다.
-      sqlSession.delete("ProjectDao.deleteMembers", project.getNo());
-
-      // => 새로 팀원을 입력한다.
-      for (Member member : project.getMembers()) {
-        HashMap<String,Object> map = new HashMap<>();
-        map.put("memberNo", member.getNo());
-        map.put("projectNo", project.getNo());
-        sqlSession.insert("ProjectDao.insertMember", map);
-      }
-      sqlSession.commit();
-      return 1;
+      return sqlSession.update("ProjectDao.update", project);
     }
   }
 }
+
