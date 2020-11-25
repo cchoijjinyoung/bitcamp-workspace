@@ -23,6 +23,8 @@ public class Servlet01 extends GenericServlet {
     // 자바(Unicode2;UTF-16) ===> 출력문자(ASCII)
     PrintWriter out = res.getWriter();
     out.println("Hello!");
+
+
     out.println("안녕하세요!");
     out.println("こんにちは");
     out.println("您好");

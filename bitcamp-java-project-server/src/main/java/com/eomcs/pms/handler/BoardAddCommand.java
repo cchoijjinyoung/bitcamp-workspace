@@ -1,8 +1,14 @@
 package com.eomcs.pms.handler;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.service.BoardService;
@@ -10,19 +16,21 @@ import com.eomcs.util.Prompt;
 
 // Command 규칙에 따라 클래스를 정의한다.
 @CommandAnno("/board/add")
-public class BoardAddCommand implements Command {
-
-  BoardService boardService;
-
-  public BoardAddCommand(BoardService boardService) {
-    this.boardService = boardService;
-  }
+public class BoardAddCommand extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
   @Override
-  public void execute(Request request) {
-    PrintWriter out = request.getWriter();
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+
+    ServletContext ctx = request.getServletContext();
+    BoardService boardService = (BoardService)ctx.getAttribute("boardService");
+
+      response.setContentType("text/plain;charset=UTF-8");
+
+    PrintWriter out = response.getWriter();
     BufferedReader in = request.getReader();
-    Map<String, Object> session = request.getSessionId();
+    Map<String, Object> session = (Map<String, Object>) request.getSession();
     try {
       out.println("[게시물 등록]");
 
