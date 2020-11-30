@@ -10,9 +10,9 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 // @WebFilter(
-// value="/ex06/*",
+// value="/ex05/*",
 // initParams={
-// @WebInitParam(name="encoding", value="EUC-KR")
+// @WebInitParam(name="encoding", value="UTF-8")
 // })
 public class Filter02 implements Filter {
 
