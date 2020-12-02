@@ -2,7 +2,6 @@ package com.eomcs.pms.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,21 +55,22 @@ public class LoginServlet extends HttpServlet {
           // 로그인이 성공했으면 회원 정보를
           // 각 클라이언트의 전용 보관소인 session에 저장한다.
           session.setAttribute("loginUser", member);
-          out.printf("<p>%s 님 반갑습니다.</p>\n", member.getName());
+          response.sendRedirect("../index.html");
+          return;
+//          request.getRequestDispatcher("/index.html").forward(request, response);
+//          return;
         }
       }
 
     } catch (Exception e) {
-      out.println("<h2>작업 처리 중 오류 발생!</h2>");
-      out.printf("<pre>%s</pre>\n", e.getMessage());
-
-      StringWriter errOut = new StringWriter();
-      e.printStackTrace(new PrintWriter(errOut));
-      out.println("<h3>상세 오류 내용</h3>");
-      out.printf("<pre>%s</pre>\n", errOut.toString());
+      request.setAttribute("exception", e);
+      request.getRequestDispatcher("/error").forward(request, response);
+      return;
     }
 
     out.println("</body>");
     out.println("</html>");
+
+    response.setHeader("Refresh", "1;url=../index.html");
   }
 }

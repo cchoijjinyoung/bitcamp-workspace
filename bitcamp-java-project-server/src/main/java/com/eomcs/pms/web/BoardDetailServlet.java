@@ -2,7 +2,6 @@ package com.eomcs.pms.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,9 +39,10 @@ public class BoardDetailServlet extends HttpServlet {
       Board board = boardService.get(no);
 
       if (board == null) {
-        out.println("해당 번호의 게시글이 없습니다.");
-        return;
-      }
+        out.println("<p>해당 게시글이 없습니다.</p>");
+        response.setHeader("Refresh", "2;url=list");
+      } else {
+
       out.println("<form action='update' method='post'>");
       out.printf("번호: <input type='text' name='no' value='%d' readonly><br>\n",
           board.getNo());
@@ -59,13 +59,11 @@ public class BoardDetailServlet extends HttpServlet {
       out.println("</p>");
       out.println("</form>");
 
+      }
     } catch (Exception e) {
-      out.printf("<p>작업 처리 중 오류 발생! - %s</p>\n", e.getMessage());
-
-      StringWriter errOut = new StringWriter();
-      e.printStackTrace(new PrintWriter(errOut));
-
-      out.printf("<pre>%s</pre>\n", errOut.toString());
+      request.setAttribute("exception", e);
+      request.getRequestDispatcher("/error").forward(request, response);
+      return;
     }
 
     out.println("</body>");

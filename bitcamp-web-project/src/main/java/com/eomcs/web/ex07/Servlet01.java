@@ -58,6 +58,7 @@ public class Servlet01 extends HttpServlet {
       요청배달자.forward(request, response);
 
       System.out.println("ex07/Servlet01!!!");
+      out.println("어떻게 될까?");
       // 포워딩 한 서블릿을 실행한 후 리턴된다.
       // 단 리턴된 후에 출력하는 것은 모두 무시된다.
       // 따라서 포워딩 후에 리턴되면 하위의 코드를 실행하지 않고

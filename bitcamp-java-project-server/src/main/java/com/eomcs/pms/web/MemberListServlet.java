@@ -17,23 +17,26 @@ import com.eomcs.pms.service.MemberService;
 public class MemberListServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-@Override
-protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-  ServletContext ctx = request.getServletContext();
-  MemberService memberService =
-      (MemberService) ctx.getAttribute("memberService");
+  @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-  response.setContentType("text/html;charset=UTF-8");
-  PrintWriter out = response.getWriter();
+    ServletContext ctx = request.getServletContext();
+    MemberService memberService =
+        (MemberService) ctx.getAttribute("memberService");
 
-  out.println("<!DOCTYPE html>");
-  out.println("<html>");
-  out.println("<head><title>유저 목록</title></head>");
-  out.println("<body>");
-  try {
-    out.println("<h1>유저 목록</h1>");
-    out.println("<a href='form.html'>새 회원</a><br>");
+    response.setContentType("text/html;charset=UTF-8");
+    PrintWriter out = response.getWriter();
+
+    out.println("<!DOCTYPE html>");
+    out.println("<html>");
+    out.println("<head><title>회원목록</title></head>");
+    out.println("<body>");
+    try {
+      out.println("<h1>회원 목록</h1>");
+
+      out.println("<a href='form.html'>새 회원</a><br>");
+
       List<Member> list = memberService.list();
 
       out.println("<table border='1'>");
@@ -46,10 +49,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
           + "</tr></thead>");
 
       out.println("<tbody>");
+
       for (Member member : list) {
         out.printf("<tr>"
             + "<td>%d</td>"
-            + "<td><a href='detail?no=%1$d'><img src='../upload/%s' alt='[%2$s]' height='30px'>%s</a></td>"
+            + "<td><a href='detail?no=%1$d'><img src='../upload/%s_30x30.jpg' alt='[%2$s]'>%s</a></td>"
             + "<td>%s</td>"
             + "<td>%s</td>"
             + "<td>%s</td>"
@@ -64,17 +68,17 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
       out.println("</tbody>");
       out.println("</table>");
 
-  } catch (Exception e) {
-    out.printf("<p>작업 처리 중 오류 발생! - %s</p>\n", e.getMessage());
+    } catch (Exception e) {
+      out.println("<h2>작업 처리 중 오류 발생!</h2>");
+      out.printf("<pre>%s</pre>\n", e.getMessage());
 
-    StringWriter errOut = new StringWriter();
-    e.printStackTrace(new PrintWriter(errOut));
+      StringWriter errOut = new StringWriter();
+      e.printStackTrace(new PrintWriter(errOut));
+      out.println("<h3>상세 오류 내용</h3>");
+      out.printf("<pre>%s</pre>\n", errOut.toString());
+    }
 
-    out.printf("<pre>%s</pre>\n", errOut.toString());
+    out.println("</body>");
+    out.println("</html>");
   }
-  out.println("</body>");
-  out.println("</html>");
 }
-
-}
-

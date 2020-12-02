@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServlet;
 //
 //@WebServlet(
 //    value = "/ex06/s3",
-//    loadOnStartup = 1,
+//    //loadOnStartup = 1,
 //    initParams = {
 //        @WebInitParam(name = "jdbc.driver", value = "org.mariadb.jdbc.Driver"),
 //        @WebInitParam(name = "jdbc.url", value = "jdbc:mariadb://localhost/studydb"),
 //        @WebInitParam(name = "jdbc.username", value = "study"),
 //        @WebInitParam(name = "jdbc.password", value = "1111")})
-//@SuppressWarnings("serial")
+@SuppressWarnings("serial")
 public class Servlet03 extends HttpServlet {
 
   // @Override
