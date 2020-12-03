@@ -1,4 +1,4 @@
-// 보관소에 값 넣기 - forward/include 서블릿끼리 ServletRequest 공유하는 것 테스트
+ // 보관소에 값 넣기 - forward/include 서블릿끼리 ServletRequest 공유하는 것 테스트
 package com.eomcs.web.ex09;
 
 import java.io.IOException;
@@ -22,6 +22,11 @@ public class Servlet11 extends HttpServlet {
     // => http://localhost:8080/java-web/ex09/s11
     //
 
+
+    // 진영님,,, 키보드 진짜 너무너무너무너무너무넘누머누머누머너무넘 이뻐요...
+    // 왜 사고 안말하셨어요....
+
+    //부럽습니다...
     // 1) ServletContext 보관소에 값 넣기
     ServletContext sc = this.getServletContext();
     sc.setAttribute("v1", "xxx");

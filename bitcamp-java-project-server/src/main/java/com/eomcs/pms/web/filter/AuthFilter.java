@@ -34,7 +34,7 @@ public void doFilter(ServletRequest request, ServletResponse response, FilterCha
     } else {
       ServletContext servletContext = request.getServletContext();
       String contextRootPath = servletContext.getContextPath();
-      httpResponse.sendRedirect(contextRootPath + "/auth/login.html");
+      httpResponse.sendRedirect(contextRootPath + "/auth/login");
     }
   }
 
