@@ -1,7 +1,6 @@
 package com.eomcs.pms.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,14 +18,9 @@ public class BoardUpdateServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    //request.setCharacterEncoding("UTF-8");
-
     ServletContext ctx = request.getServletContext();
     BoardService boardService =
         (BoardService) ctx.getAttribute("boardService");
-
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
 
     try {
       Board board = new Board();
@@ -37,17 +31,13 @@ public class BoardUpdateServlet extends HttpServlet {
 
       if (count == 0) {
         throw new Exception("해당 번호의 게시글이 없습니다.");
-
       }
+
       response.sendRedirect("list");
 
     } catch (Exception e) {
       request.setAttribute("exception", e);
-      request.getRequestDispatcher("/error").forward(request, response);
-      return;
+      request.getRequestDispatcher("/error.jsp").forward(request, response);
     }
-
-    out.println("</body>");
-    out.println("</html>");
   }
 }

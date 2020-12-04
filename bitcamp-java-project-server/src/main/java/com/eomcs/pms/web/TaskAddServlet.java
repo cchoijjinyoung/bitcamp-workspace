@@ -1,8 +1,6 @@
 package com.eomcs.pms.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.sql.Date;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -21,24 +19,36 @@ public class TaskAddServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+
+    ServletContext ctx = request.getServletContext();
+    ProjectService projectService =
+        (ProjectService) ctx.getAttribute("projectService");
+
+    response.setContentType("text/html;charset=UTF-8");
+
+    try {
+      // 프로젝트 번호를 가지고 프로젝트 정보를 꺼내온다.
+      Project project = projectService.get(
+          Integer.parseInt(request.getParameter("projectNo")));
+      request.setAttribute("project", project);
+      request.getRequestDispatcher("/task/form.jsp").include(request, response);
+
+    } catch (Exception e) {
+      request.setAttribute("exception", e);
+      request.getRequestDispatcher("/error").forward(request, response);
+    }
+  }
+
+  @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     ServletContext ctx = request.getServletContext();
     TaskService taskService = (TaskService) ctx.getAttribute("taskService");
 
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>작업등록</title></head>");
-    out.println("<body>");
-    request.getRequestDispatcher("/header").include(request, response);
     try {
-      out.println("<h1>작업 등록</h1>");
-
       Task task = new Task();
       task.setProjectNo(Integer.parseInt(request.getParameter("projectNo")));
       task.setContent(request.getParameter("content"));
@@ -51,89 +61,12 @@ public class TaskAddServlet extends HttpServlet {
 
       taskService.add(task);
 
-      out.println("<p>작업을 등록했습니다.</p>");
-
-      // 응답 헤더에 refresh 정보를 등록한다.
-      response.setHeader("Refresh",
-          "1;url=../project/detail?no=" + request.getParameter("projectNo"));
+      response.sendRedirect("../project/detail?no=" +
+          request.getParameter("projectNo"));
 
     } catch (Exception e) {
-      out.println("<h2>작업 처리 중 오류 발생!</h2>");
-      out.printf("<pre>%s</pre>\n", e.getMessage());
-
-      StringWriter errOut = new StringWriter();
-      e.printStackTrace(new PrintWriter(errOut));
-      out.println("<h3>상세 오류 내용</h3>");
-      out.printf("<pre>%s</pre>\n", errOut.toString());
+      request.setAttribute("exception", e);
+      request.getRequestDispatcher("/error.jsp").forward(request, response);
     }
-
-    out.println("</body>");
-    out.println("</html>");
-  }
-
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-
-    ServletContext ctx = request.getServletContext();
-    ProjectService projectService =
-        (ProjectService) ctx.getAttribute("projectService");
-
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>작업등록</title></head>");
-    out.println("<body>");
-
-    try {
-      out.println("<h1>작업 등록</h1>");
-
-      // 프로젝트 번호를 가지고 프로젝트 정보를 꺼내온다.
-      Project project = projectService.get(
-          Integer.parseInt(request.getParameter("projectNo")));
-
-      out.println("<form action='add' method='post'>");
-      out.printf("<input type='hidden' name='projectNo' value='%d'>\n",
-          project.getNo());
-      out.printf("프로젝트명: %s<br>", project.getTitle());
-      out.println("작업내용: <textarea name='content' rows='10' cols='60'></textarea><br>");
-      out.println("마감일: <input type='date' name='deadline'><br>");
-      out.println("담당자: <br>");
-      out.println("<p>");
-
-      for (Member m : project.getMembers()) {
-        if (m.getState() == 0) continue;
-
-        out.printf("<input type='radio' name='owner' value='%d'>%s, \n",
-            m.getNo(),
-            m.getName());
-      }
-      out.println("</p>");
-
-      out.println("작업상태: ");
-      out.println("<select name='status'>");
-      out.println("  <option value='0'>준비</option>");
-      out.println("  <option value='1'>진행중</option>");
-      out.println("  <option value='2'>완료</option>");
-      out.println("</select><br>");
-
-      out.println("<button>등록</button>");
-      out.println("</form>");
-
-    } catch (Exception e) {
-      out.println("<h2>작업 처리 중 오류 발생!</h2>");
-      out.printf("<pre>%s</pre>\n", e.getMessage());
-
-      StringWriter errOut = new StringWriter();
-      e.printStackTrace(new PrintWriter(errOut));
-      out.println("<h3>상세 오류 내용</h3>");
-      out.printf("<pre>%s</pre>\n", errOut.toString());
-    }
-
-    out.println("</body>");
-    out.println("</html>");
   }
 }

@@ -23,14 +23,16 @@ public class BoardDeleteServlet extends HttpServlet {
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
+
       if (boardService.delete(no) == 0) {
-       throw new Exception ("해당 번호의 게시글이 없습니다.");
+        throw new Exception("해당 번호의 게시글이 없습니다.");
       }
+
       response.sendRedirect("list");
+
     } catch (Exception e) {
       request.setAttribute("exception", e);
-      request.getRequestDispatcher("/error").forward(request, response);
-      return;
+      request.getRequestDispatcher("/error.jsp").forward(request, response);
     }
   }
 }

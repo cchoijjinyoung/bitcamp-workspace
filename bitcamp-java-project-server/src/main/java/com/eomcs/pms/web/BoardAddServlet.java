@@ -23,27 +23,19 @@ public class BoardAddServlet extends HttpServlet {
     BoardService boardService =
         (BoardService) ctx.getAttribute("boardService");
 
-    // 클라이언트가 POST 요청할 때 보낸 데이터를 읽는다.
-    //request.setCharacterEncoding("UTF-8");
-
     Board board = new Board();
     board.setTitle(request.getParameter("title"));
     board.setContent(request.getParameter("content"));
 
-    // 회원 정보가 들어있는 세션 객체를 얻는다.
-
     try {
       Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-
       board.setWriter(loginUser);
-
       boardService.add(board);
       response.sendRedirect("list");
 
     } catch (Exception e) {
       request.setAttribute("exception", e);
-      request.getRequestDispatcher("/error").forward(request, response);
-      return;
+      request.getRequestDispatcher("/error.jsp").forward(request, response);
     }
   }
 }
