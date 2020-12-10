@@ -27,14 +27,13 @@ public class MemberDetailServlet extends HttpServlet {
       int no = Integer.parseInt(request.getParameter("no"));
       Member member = memberService.get(no);
       if (member == null) {
-        throw new Exception("해당 회원이 없습니다.");
+        throw new Exception("해당 회원이 없습니다!");
       }
       request.setAttribute("member", member);
-      request.getRequestDispatcher("/member/detail.jsp").include(request, response);
+      request.setAttribute("viewName", "/member/detail.jsp");
 
     } catch (Exception e) {
       request.setAttribute("exception", e);
-      request.getRequestDispatcher("/error.jsp").forward(request, response);
     }
   }
 }

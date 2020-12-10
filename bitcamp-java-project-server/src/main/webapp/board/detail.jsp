@@ -1,4 +1,3 @@
-<%@page import="com.eomcs.pms.domain.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,7 +7,7 @@
 
 <jsp:include page="/header.jsp"></jsp:include>
 
-<h1>게시물 조회(JSP)</h1>
+<h1>게시물 조회(JSP+EL+JSTL)</h1>
 
 <form action='update' method='post'>
 번호: <input type='text' name='no' value='${board.no}' readonly><br>
@@ -23,5 +22,6 @@
 <a href='list'>[목록]</a>
 </p>
 </form>
+
 </body>
 </html>
