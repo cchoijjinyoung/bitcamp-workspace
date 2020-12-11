@@ -20,13 +20,7 @@ public class AutoLoginListener implements ServletRequestListener {
 
       if (session.getAttribute("loginUser") == null) {
 
-        Map<String,Object> beanContainer =
-            (Map<String,Object>) sre.getServletContext().getAttribute("beanContainer");
-
-        MemberService memberService =
-            (MemberService) beanContainer.get("memberService");
-
-        Member member = memberService.get("chl@com", "1111");
+        Member member = new Member().setNo(1).setName().setEmail("chl@com");
 
         session.setAttribute("loginUser", member);
       }
