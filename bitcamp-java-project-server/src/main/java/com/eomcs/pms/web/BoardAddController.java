@@ -8,6 +8,7 @@ import com.eomcs.pms.service.BoardService;
 
 @RequestMapping("/board/add")
 public class BoardAddController implements Controller {
+
   BoardService boardService;
 
   public BoardAddController(BoardService boardService) {
@@ -16,14 +17,14 @@ public class BoardAddController implements Controller {
 
   @Override
   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-      Board board = new Board();
-      board.setTitle(request.getParameter("title"));
-      board.setContent(request.getParameter("content"));
 
-      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-      board.setWriter(loginUser);
-      boardService.add(board);
+    Board board = new Board();
+    board.setTitle(request.getParameter("title"));
+    board.setContent(request.getParameter("content"));
 
-      return "redirect:list";
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    board.setWriter(loginUser);
+    boardService.add(board);
+    return "redirect:list";
   }
 }

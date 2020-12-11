@@ -20,33 +20,37 @@ import org.apache.ibatis.io.Resources;
 @WebServlet(value = "/app/*", loadOnStartup = 1)
 public class DispatcherServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
-  Map<String, Object> beanContainer;
+
+  Map<String,Object> beanContainer;
   Map<String,Controller> controllerMap;
 
   @SuppressWarnings("unchecked")
   @Override
   public void init() throws ServletException {
+    // ContextLoaderListener가 준비한 Service 객체를 사용하여
+    // 페이지 컨트롤러를 준비한다.
+    beanContainer =
+        (Map<String,Object>) this.getServletContext().getAttribute("beanContainer");
 
     try {
-    beanContainer = (Map<String, Object>) this.getServletContext().getAttribute("beanContainer");
+      // 페이지 컨트롤러가 있는 패키지의 파일 경로를 알아내기
+      // => Mybatis 에서 제공하는 클래스의 도움을 받는다.
+      File path = Resources.getResourceAsFile("com/eomcs/pms/web");
 
-    File path = Resources.getResourceAsFile("com/eomcs/pms/web");
+      // => 파일 경로에 URL 인코딩 문자가 들어 있으면 제거한다.
+      String decodedFilePath = URLDecoder.decode(path.getCanonicalPath(), "UTF-8");
 
-    // => 파일 경로에 URL 인코딩 문자가 들어 있으면 제거한다.
-    String decodedFilePath = URLDecoder.decode(path.getCanonicalPath(), "UTF-8");
+      // => URL 디코딩된 파일 경로를 가지고 새로 파일 경로를 만든다.
+      File controllerPackagePath = new File(decodedFilePath);
 
-    // => URL 디코딩된 파일 경로를 가지고 새로 파일 경로를 만든다.
-    File controllerPackagePath = new File(decodedFilePath);
+      System.out.println(controllerPackagePath.getCanonicalPath());
 
-    System.out.println(controllerPackagePath.getCanonicalPath());
+      // 해당 패키지에 들어 있는 페이지 컨트롤러 클래스를 찾아 인스턴스를 생성한다.
+      controllerMap = createControllers(controllerPackagePath, "com.eomcs.pms.web");
 
-    // 해당 패키지에 들어 있는 페이지 컨트롤러 클래스를 찾아 인스턴스를 생성한다.
-
-    controllerMap = createControllers(controllerPackagePath, "com.eomcs.pms.web");
-
-    } catch(Exception e) {
-    System.out.println("DispatcherServlet 에서 페이지 컨트롤러를 준비하는 중 오류 발생!");
-    e.printStackTrace();
+    } catch (Exception e) {
+      System.out.println("DispatcherServlet 에서 페이지 컨트롤러를 준비하는 중 오류 발생!");
+      e.printStackTrace();
     }
   }
 
@@ -162,5 +166,6 @@ public class DispatcherServlet extends HttpServlet {
     }
     return null;
   }
+
 
 }
