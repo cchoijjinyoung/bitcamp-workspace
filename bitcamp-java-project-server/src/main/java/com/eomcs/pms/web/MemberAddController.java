@@ -1,12 +1,11 @@
 package com.eomcs.pms.web;
 
 import java.util.UUID;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.service.MemberService;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
@@ -15,33 +14,20 @@ import net.coobird.thumbnailator.name.Rename;
 @Controller
 public class MemberAddController {
 
-  MemberService memberService;
-
-  public MemberAddController(MemberService memberService) {
-    this.memberService = memberService;
-  }
+  @Autowired ServletContext servletContext;    // 매서드의 파라미터로 못 받는다.
+  @Autowired MemberService memberService;
 
   @RequestMapping("/member/add")
-  public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-    Member member = new Member();
-    member.setName(request.getParameter("name"));
-    member.setEmail(request.getParameter("email"));
-    member.setPassword(request.getParameter("password"));
-    member.setTel(request.getParameter("tel"));
-
-    Part photoPart = request.getPart("photo");
-
+  public String execute(String name, String email, String password, String tel, Part photoFile) throws Exception {
+      //리턴값은 jsp다          // 멀티파트 파일은 따로 받아라.
+    
     String filename = UUID.randomUUID().toString();
-    String saveFilePath = request.getServletContext().getRealPath("/upload/" + filename);
+    String saveFilePath = servletContext.getRealPath("/upload/" + filename);
 
-    photoPart.write(saveFilePath);
-
-    member.setPhoto(filename);
+    photoFile.write(saveFilePath);
 
     generatePhotoThumbnail(saveFilePath);
 
-    memberService.add(member);
     return "redirect:list";
   }
 

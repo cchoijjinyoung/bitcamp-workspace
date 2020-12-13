@@ -4,6 +4,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.eomcs.pms.domain.Member;
@@ -12,12 +13,10 @@ import com.eomcs.pms.service.MemberService;
 
 @Controller
 public class LoginController {
-  MemberService memberService;
-public LoginController(MemberService memberService) {
-  this.memberService = memberService;
-}
+  @Autowired MemberService memberService;
+  
 @RequestMapping("/auth/login")
-  public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  public String execute(Cookie cookie) throws Exception {
   response.setContentType("text/html;charset=UTF-8");
     // 웹브라우저가 쿠키로 이메일을 보냈으면 꺼낸다.
       
