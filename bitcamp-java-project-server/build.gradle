@@ -10,6 +10,8 @@ repositories {
 }
 
 dependencies {
+    // 스프링 IoC 컨테이너
+    implementation 'org.springframework:spring-context:5.3.2'
     // 스프링 프레임워크 라이브러리
     implementation 'org.springframework:spring-webmvc:5.3.2'
     // 썸네일 생성 라이브러리

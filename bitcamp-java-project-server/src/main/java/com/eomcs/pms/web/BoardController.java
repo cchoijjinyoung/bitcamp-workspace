@@ -1,6 +1,5 @@
 package com.eomcs.pms.web;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +14,7 @@ import com.eomcs.pms.service.BoardService;
 public class BoardController {
 
   @Autowired BoardService boardService;
-  // autowired = 알아서 의존객체를 생성해준다.(IOC 컨테이너가)
-  
+
   @RequestMapping("add")
   public String add(Board board, HttpSession session) throws Exception {
     Member loginUser = (Member) session.getAttribute("loginUser");
@@ -24,7 +22,7 @@ public class BoardController {
     boardService.add(board);
     return "redirect:list";
   }
-  
+
   @RequestMapping("delete")
   public String delete(int no) throws Exception {
     if (boardService.delete(no) == 0) {
@@ -32,30 +30,31 @@ public class BoardController {
     }
     return "redirect:list";
   }
-  
+
   @RequestMapping("detail")
-  public ModelAndView detail(int no, HttpServletResponse response) throws Exception {
-    response.setContentType("text/html;charset=UTF-8");
+  public ModelAndView detail(int no) throws Exception {
     Board board = boardService.get(no);
     if (board == null) {
       throw new Exception("해당 번호의 게시글이 없습니다!");
     }
-    
+
     ModelAndView mv = new ModelAndView();
     mv.addObject("board", board);
     mv.setViewName("/board/detail.jsp");
+
     return mv;
   }
-  
+
   @RequestMapping("list")
   public ModelAndView list(String keyword) throws Exception {
+
     ModelAndView mv = new ModelAndView();
     mv.addObject("list", boardService.list(keyword));
     mv.setViewName("/board/list.jsp");
-    
+
     return mv;
   }
-  
+
   @RequestMapping("update")
   public String update(Board board) throws Exception {
     int count = boardService.update(board);
