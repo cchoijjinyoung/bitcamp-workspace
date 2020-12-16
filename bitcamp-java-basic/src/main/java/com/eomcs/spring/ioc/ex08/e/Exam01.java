@@ -16,7 +16,7 @@ public class Exam01 {
     // => 물론 그 파라미터에 해당하는 객체가 존재해야 한다.
     //
     ApplicationContext iocContainer = new ClassPathXmlApplicationContext(//
-        "com/eomcs/spring/ioc/ex08/f/application-context.xml");
+        "com/eomcs/spring/ioc/ex08/e/application-context.xml");
 
     // Spring IoC 컨테이너에 들어 있는 객체 출력
     SpringUtils.printBeanList(iocContainer);

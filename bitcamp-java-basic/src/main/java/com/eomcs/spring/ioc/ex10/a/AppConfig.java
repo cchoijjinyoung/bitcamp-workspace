@@ -15,7 +15,7 @@ public class AppConfig {
   // 스프링 IoC 컨테이너(AnnotationConfigApplicationContext)는
   // 해당 메서드를 호출하고, 메서드가 리턴한 객체를 컨테이너에 보관한다.
   //
-  @Bean("car") // 애노케이션에 지정한 이름으로 리턴 값을 보관한다.
+  //@Bean("car") // 애노케이션에 지정한 이름으로 리턴 값을 보관한다.
   public Car getCar2() {
     Car c = new Car(null);
     c.setMaker("비트자동차");
@@ -25,7 +25,7 @@ public class AppConfig {
     return c;
   }
 
-  @Bean // 이름을 지정하지 않으면 메서드 이름을 사용하여 저장한다.
+  //@Bean // 이름을 지정하지 않으면 메서드 이름을 사용하여 저장한다.
   public Car getCar() {
     Car c = new Car(null);
     c.setMaker("비트자동차");
@@ -41,7 +41,7 @@ public class AppConfig {
   // => 보통 어떤 값을 리턴할 때는 getXxx()라는 이름으로 메서드를 만드는데,
   // 이처럼 객체이름으로 사용할 수 있도록 메서드를 만드는 경우도 있으니
   // 당황하지 말라!
-  @Bean
+  //@Bean
   public Car car2() {
     Car c = new Car(null);
     c.setMaker("비트자동차");
