@@ -7,7 +7,13 @@ public class ChoiExam implements Exam {
   private int math;
   private int com;
   
+public ChoiExam(int kor, int eng, int math, int com) {
+  this.kor = kor;
+  this.eng = eng;
+  this.math = kor;
+  this.com = com; 
   
+}  
 
   @Override
   public int total() {

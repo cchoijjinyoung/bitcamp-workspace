@@ -1,10 +1,8 @@
 package spring.di;
 
-import spring.di.entity.ChoiExam;
-import spring.di.entity.Exam;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import spring.di.ui.ExamConsole;
-import spring.di.ui.GridExamConsole;
-import spring.di.ui.InlineExamConsole;
 
 public class Program {
 
@@ -19,7 +17,8 @@ public class Program {
     // setting.xml 에게 이것좀 해줄래? 라고 알려주자
     
     ApplicationContext context = 
-        new ClassPathXmlApplicationContext("spring.di");
+        new ClassPathXmlApplicationContext("spring.di.setting.xml");
+    ExamConsole console = context.getBean(ExamConsole.class);
     console.print();
   }
 }

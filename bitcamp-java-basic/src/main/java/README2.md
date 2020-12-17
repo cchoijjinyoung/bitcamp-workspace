@@ -95,4 +95,11 @@ xml컨피그방식 -
 자바컨피그방식은 @MapperScan("맵퍼경로") 을 붙여주자
 
 # 일단 적어보자..
-
+Mybatis 와 spring을 연동해보자...
+너무 어렵다
+맵퍼파일의 네임스페이스명이 인터페이스이름과 같아야한다.
+빌드 그레이들 변경.
+app-sevlet 변경
+mapper 네임스페이스 변경(com.eomcs.pms.dao.BoardDao)
+Dao의 파라미터타입과 Mapper의 파라미터타입이 같은 지 확인한다. 리졸트맵은 신경쓰지마
+다오구현체와 util(sqlSession) 전체를 날려버린다.
