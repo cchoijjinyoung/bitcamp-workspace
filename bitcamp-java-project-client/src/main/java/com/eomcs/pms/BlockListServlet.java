@@ -27,6 +27,7 @@ public class BlockListServlet extends HttpServlet {
 
       List<Block> blockList = null;
       blockList = blockService.list(null);
+      System.out.println(blockList);
 
       request.setAttribute("blockList", blockList);
       request.getRequestDispatcher("/block/blockList.jsp").include(request, response);
