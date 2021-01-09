@@ -667,5 +667,6 @@ macOS 개발 환경 구축하기
   - 데이터베이스에 대해 사용자 권한 설정 
 - SQL 
   - DDL(Data Definition Lanugage)
+  - commit
 
 
