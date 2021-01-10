@@ -668,5 +668,6 @@ macOS 개발 환경 구축하기
 - SQL 
   - DDL(Data Definition Lanugage)
   - commit
+  - create
 
 
